@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Validation\ValidationException;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobsController;
 
 
 /*
@@ -30,7 +31,5 @@ Route::post('/login', [AuthController::class, 'DangNhap']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'DangXuat']);
 
 // Test get Jobs
-Route::middleware('auth:sanctum')->get('/jobs', function (Request $request) {
-    return Jobs::all();
-});
+Route::middleware('auth:sanctum')->get('/jobs', [JobsController::class, 'GetAllJobs']);
 
