@@ -16,6 +16,8 @@ class AuthController extends Controller
             'display_name' => 'required|string',
             'password' => 'required|string',
         ]);
+
+        // post User data
         $randInit = str_replace("-", "", (string)rand(1,9999).(string)Carbon::now()->toDateString());
         $user = User::create([
             'user_id' => 'user'.$randInit,
@@ -30,5 +32,37 @@ class AuthController extends Controller
         ];
 
         return response($response, 201);
+    }
+
+    public function DangNhap(Request $req){
+        $fields = $req->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+        
+        // check User data
+        $getUserByEmail = User::where('email', $fields['email'])->first(); 
+
+        if(!$getUserByEmail || !Hash::check($fields['password'], $getUserByEmail->password)){
+            return response([
+                'message' => 'Sai thong tin dang nhap'
+            ], 401);
+        }
+         
+        $token = $getUserByEmail->createToken('myapptoken')->plainTextToken;
+        $response = [
+            'user' => $getUserByEmail,
+            'token' => $token, // token để authenticate tính năng dưới dạng Bearer Token (Postman)
+        ];
+
+        return response($response, 201);
+    }
+
+    public function DangXuat(Request $req){
+        auth()->user()->tokens()->delete();
+
+        return [
+            'message' => "Logged out",
+        ];
     }
 }
