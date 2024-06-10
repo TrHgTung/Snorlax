@@ -13,23 +13,29 @@ use Illuminate\Foundation\Validation\ValidationException;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JobsController;
 
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
-
 // authentication
 Route::post('/register', [AuthController::class, 'DangKy']);
 Route::post('/login', [AuthController::class, 'DangNhap']);
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'DangXuat']);
+// Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'DangXuat']);
 
 // Test get Jobs
-Route::middleware('auth:sanctum')->get('/jobs', [JobsController::class, 'GetAllJobs']);
+// Route::middleware('auth:sanctum')->get('/jobGet', [JobsController::class, 'GetAllJobs']);
+// Route::middleware('auth:sanctum')->post('/jobPost', [JobsController::class, 'AddJob']);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // Interact with Job Data
+    Route::get('/jobGet', [JobsController::class, 'GetAllJobs']);
+    Route::post('/jobPost', [JobsController::class, 'AddJob']);
+    Route::get('/jobs/{id}', [JobsController::class, 'JobDetails']);
+    Route::put('/jobs/{id}', [JobsController::class, 'Update']);
+    Route::delete('/jobs/{id}', [JobsController::class, 'Destroy']);
+    // User information
+    Route::post('/logout', [AuthController::class, 'DangXuat']);
+    Route::get('/profile/{id}', [AuthController::class, 'Profile']);
+});
+
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 

@@ -65,4 +65,8 @@ class AuthController extends Controller
             'message' => "Logged out",
         ];
     }
+
+    public function Profile($id){
+        return User::find($id);
+    }
 }
