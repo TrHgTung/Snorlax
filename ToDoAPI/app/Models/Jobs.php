@@ -16,4 +16,5 @@ class Jobs extends Model
         'deadline',
         'last_modified',
     ];
+    public $timestamps = false;
 }

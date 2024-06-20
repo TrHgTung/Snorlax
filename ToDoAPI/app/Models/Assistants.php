@@ -13,5 +13,6 @@ class Assistants extends Model
         'job_id',
         'character_id'
     ];
+    public $timestamps = false;
    
 }

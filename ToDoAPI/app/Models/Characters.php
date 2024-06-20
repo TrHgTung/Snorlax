@@ -12,4 +12,5 @@ class Characters extends Model
         'character_id',
         'character_name'
     ];
+    public $timestamps = false;
 }

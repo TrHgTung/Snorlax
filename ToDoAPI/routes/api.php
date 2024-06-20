@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Interact with Job Data
     Route::get('/jobs', [JobsController::class, 'GetAllJobs']);
     Route::post('/jobPost', [JobsController::class, 'AddJob']);
-    Route::get('/job/{id}', [JobsController::class, 'JobDetails']);
+    //Route::get('/job/{id}', [JobsController::class, 'JobDetails']);
     Route::put('/job/{id}', [JobsController::class, 'Update']);
     Route::delete('/job/{id}', [JobsController::class, 'Destroy']);
     // User information
