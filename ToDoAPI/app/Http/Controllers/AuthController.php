@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -66,7 +67,16 @@ class AuthController extends Controller
         ];
     }
 
-    public function Profile($id){
-        return User::find($id);
+    public function Profile(){
+        $userData = auth()->user();
+        $userId = auth()->user()->user_id;
+
+        return response()->json([
+            //'status' => true,
+            'message' => 'User info',
+            'data' => $userData,
+            'user_id' => $userId,
+        ], 200);
     }
+    
 }

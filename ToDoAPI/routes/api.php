@@ -16,26 +16,17 @@ use App\Http\Controllers\JobsController;
 // authentication
 Route::post('/register', [AuthController::class, 'DangKy']);
 Route::post('/login', [AuthController::class, 'DangNhap']);
-// Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'DangXuat']);
-
-// Test get Jobs
-// Route::middleware('auth:sanctum')->get('/jobGet', [JobsController::class, 'GetAllJobs']);
-// Route::middleware('auth:sanctum')->post('/jobPost', [JobsController::class, 'AddJob']);
-
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     // Interact with Job Data
-    Route::get('/jobGet', [JobsController::class, 'GetAllJobs']);
+    Route::get('/jobs', [JobsController::class, 'GetAllJobs']);
     Route::post('/jobPost', [JobsController::class, 'AddJob']);
-    Route::get('/jobs/{id}', [JobsController::class, 'JobDetails']);
-    Route::put('/jobs/{id}', [JobsController::class, 'Update']);
-    Route::delete('/jobs/{id}', [JobsController::class, 'Destroy']);
+    Route::get('/job/{id}', [JobsController::class, 'JobDetails']);
+    Route::put('/job/{id}', [JobsController::class, 'Update']);
+    Route::delete('/job/{id}', [JobsController::class, 'Destroy']);
     // User information
     Route::post('/logout', [AuthController::class, 'DangXuat']);
-    Route::get('/profile/{id}', [AuthController::class, 'Profile']);
+    Route::get('/profile', [AuthController::class, 'Profile']);
 });
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
