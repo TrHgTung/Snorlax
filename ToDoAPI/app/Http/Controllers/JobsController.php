@@ -24,22 +24,26 @@ class JobsController extends Controller
     }
 
     public function AddJob(Request $req){
+        $randNum = (string)rand(1111,9999);
         $userId = (string)auth()->user()->user_id;
+        $updateModifiedDate = (string)Carbon::now()->toDateString();
+        $jobIdInit = 'JOB'.str_replace('-','', $updateModifiedDate).$randNum.$userId;
+
         $req->validate([
-            'job_id' => 'required',
+            //'job_id' => 'required',
             //'user_id' => 'required',
             'content' => 'required',
             'priority_level' => 'required',
             'deadline' => 'required',
-            'last_modified' => 'required',
+            //'last_modified' => 'required',
         ]);
 
         $data = $req->all();
+        $data['job_id'] = $jobIdInit;
         $data['user_id'] = $userId;
+        $data['last_modified'] = $updateModifiedDate;
             
-         return Jobs::create($data);
-        //echo $userId;
-        //return;
+        return Jobs::create($data);
     }
 
     // public function JobDetails($id){ // for testing API
@@ -47,24 +51,27 @@ class JobsController extends Controller
     // } 
 
     public function Update(Request $req, $id){
+        $updateModifiedDate = (string)Carbon::now()->toDateString();
+
         $userId = (string)auth()->user()->user_id;
-        $getJobsAuthorized = Jobs::where('user_id', $userId)->first(); // chỉ lấy những job có userId được authorized
+        $getJobsAuthorized = Jobs::where('user_id', $userId)->get(); // chỉ lấy những job có userId được authorized
         $staticUsrId = (string)$getJobsAuthorized->user_id;
 
         if (!$getJobsAuthorized) {
             return response()->json(['error' => 'Không tìm thấy'], 404);
         }
         else if($staticUsrId == $userId){
-            $req->validate([
-                'job_id' => 'sometimes|required',
-                'content' => 'sometimes|required',
-                'priority_level' => 'sometimes|required',
-                'deadline' => 'sometimes|required',
-                'last_modified' => 'sometimes|required',
-            ]);
+            // $req->validate([ // khong can require
+            //     //'job_id' => 'sometimes|required',
+            //     'content' => 'sometimes|required',
+            //     'priority_level' => 'sometimes|required',
+            //     'deadline' => 'sometimes|required',
+            //     //'last_modified' => 'sometimes|required',
+            // ]); 
             
             $data = $req->all();
-            $data['user_id'] = $userId;
+            //$data['user_id'] = $userId;
+            $data['last_modified'] = $updateModifiedDate;
     
             $getJobsAuthorized->update($data);
             
