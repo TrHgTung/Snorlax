@@ -54,23 +54,13 @@ class JobsController extends Controller
         $updateModifiedDate = (string)Carbon::now()->toDateString();
 
         $userId = (string)auth()->user()->user_id;
-        $getJobsAuthorized = Jobs::where('user_id', $userId)->get(); // chỉ lấy những job có userId được authorized
-        $staticUsrId = (string)$getJobsAuthorized->user_id;
+        $getJobsAuthorized = Jobs::where('user_id', $userId)->where('id', $id)->first(); // chỉ lấy những job có userId được authorized
 
         if (!$getJobsAuthorized) {
             return response()->json(['error' => 'Không tìm thấy'], 404);
         }
-        else if($staticUsrId == $userId){
-            // $req->validate([ // khong can require
-            //     //'job_id' => 'sometimes|required',
-            //     'content' => 'sometimes|required',
-            //     'priority_level' => 'sometimes|required',
-            //     'deadline' => 'sometimes|required',
-            //     //'last_modified' => 'sometimes|required',
-            // ]); 
-            
+        else if($getJobsAuthorized){
             $data = $req->all();
-            //$data['user_id'] = $userId;
             $data['last_modified'] = $updateModifiedDate;
     
             $getJobsAuthorized->update($data);
