@@ -15,6 +15,7 @@ class Jobs extends Model
         'priority_level',
         'deadline',
         'last_modified',
+        'status',
     ];
     public $timestamps = false;
 }

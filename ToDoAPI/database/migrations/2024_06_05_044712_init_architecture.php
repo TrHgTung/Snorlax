@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('priority_level');
             $table->string('deadline');
             $table->string('last_modified');
+            $table->string('status');
         });
 
         Schema::create('assistants', function (Blueprint $table) {

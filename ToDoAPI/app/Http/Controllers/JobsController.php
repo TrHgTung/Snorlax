@@ -12,11 +12,11 @@ use Carbon\Carbon;
 
 class JobsController extends Controller
 {
-    public function GetAllJobs(){
-        // $jobs = Jobs::all(); // for testing API
+    public function GetAllJobs(){ // get all jobs but by a specific user (auth requested)
+        // $jobs = Jobs::all(); 
         $userId = auth()->user()->user_id;
 
-        $getJobsByUsrId = Jobs::where('user_id', $userId)->get();
+        $getJobsByUsrId = Jobs::where('user_id', $userId)->where('status', '1')->get();
 
         return response([
             'result' => $getJobsByUsrId,
@@ -42,6 +42,7 @@ class JobsController extends Controller
         $data['job_id'] = $jobIdInit;
         $data['user_id'] = $userId;
         $data['last_modified'] = $updateModifiedDate;
+        $data['status'] = '1';
             
         return Jobs::create($data);
     }
@@ -54,7 +55,7 @@ class JobsController extends Controller
         $updateModifiedDate = (string)Carbon::now()->toDateString();
 
         $userId = (string)auth()->user()->user_id;
-        $getJobsAuthorized = Jobs::where('user_id', $userId)->where('id', $id)->first(); // chỉ lấy những job có userId được authorized
+        $getJobsAuthorized = Jobs::where('user_id', $userId)->where('status', '1')->where('id', $id)->first(); // chỉ lấy những job có userId được authorized
 
         if (!$getJobsAuthorized) {
             return response()->json(['error' => 'Không tìm thấy'], 404);
@@ -77,9 +78,45 @@ class JobsController extends Controller
         //  return;
         
     }
+    
+    public function Finish(Request $req, $id){
+        $updateModifiedDate = (string)Carbon::now()->toDateString();
 
-    public function Destroy($id){
-        return Jobs::destroy($id);
+        $userId = (string)auth()->user()->user_id;
+        $getJobsAuthorized = Jobs::where('user_id', $userId)->where('status', '1')->where('id', $id)->first(); // chỉ lấy những job có userId được authorized
+
+        if (!$getJobsAuthorized) {
+            return response()->json(['error' => 'Không tìm thấy'], 404);
+        }
+        else if($getJobsAuthorized){
+            //$data = $req->all();
+            $data['status'] = '0';
+    
+            $getJobsAuthorized->update($data);
+            
+            return response()->json($data, 200);
+        }
+        else{
+            return response()->json([
+                'message' => 'Thao tác bị chặn, bạn không đủ quyền (Not Authorized)',
+            ], 401);
+        }
+    }
+
+    // public function Destroy($id){ // for testing API
+    //     return Jobs::destroy($id);
+    // }
+
+    public function XemCacJobsDaHoanThanh(){ // get all jobs but by a specific user (auth requested)
+        // $jobs = Jobs::all(); // for testing API
+        $userId = auth()->user()->user_id;
+
+        // $getJobsByUsrId = Jobs::where('user_id', $userId)->where('status', '0')->get();
+        $getJobsByUsrId = Jobs::where('user_id', $userId)->get();
+
+        return response([
+            'result' => $getJobsByUsrId,
+        ], 200);
     }
 
 }
