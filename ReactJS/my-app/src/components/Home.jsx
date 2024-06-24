@@ -1,9 +1,36 @@
 import React, { Component, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Task from './Task';
+import { Navigate, useNavigate  } from 'react-router-dom';
 
-export class Home extends Component {
-  render() {
+
+const Home = ()  => {
+  // const [authenticate, setAuthenticate] = useState('');
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("token");
+  //   if (loggedInUser) {
+  //     setAuthenticate(loggedInUser);
+  //   }
+  // }, []);
+
+  // if (!authenticate) {
+  // // Redirect
+  // } else {
+  //   return (
+  //     <Navigate to="/login" />
+  //   );
+  // }
+
+  // const checkLogin = async (e) => {
+  //   e.preventDefault()
+  //   if(localStorage.getItem("token") === null){
+  //         return <Navigate to="/login" />
+  //     }else{
+  //         return <Navigate to="/list" />
+  //     }
+  // };
+
+  
     return (
       <div className='container'>
         <h2 className='w-100 d-flex justify-content-center p-3 mb-4'>To-do list</h2>
@@ -34,6 +61,6 @@ export class Home extends Component {
       </div>
     )
   }
-}
 
-export default Home
+
+export default Home;

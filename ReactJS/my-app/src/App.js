@@ -3,17 +3,27 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './components/Login';
 import Home from './components/Home';
+import { AuthProvider } from './supports/AuthProvider';
+import PrivateRoute from './supports/PrivateRoute';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route exact path='/login' element={<Login/>} />
-          <Route exact path='/' element={<Home/>} />
-        </Routes>
-      </Router>
-    </div>
+    <Router>
+      <AuthProvider>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route 
+                        path="/list" 
+                        element={
+                            <PrivateRoute>
+                                <Home />
+                            </PrivateRoute>
+                        } 
+                    />
+                    {/* Các route khác */}
+                </Routes>
+        </AuthProvider>
+    </Router>
   );
 }
 
