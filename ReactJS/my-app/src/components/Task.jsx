@@ -41,28 +41,31 @@ const Task = () => {
   
     const handleHoanThanhTask = async (jobId) => {
         try {
-            const response = await axios.put(`http://127.0.0.1:4401/api/finish/job/${jobId}`, {
-                status: '0' // Cap nhat thanh '0' (hoan thanhf Task)
-            }, {
+            const response = await axios.put(`http://127.0.0.1:4401/api/finish/job/${jobId}`, 
+                // status: '0' // Cap nhat thanh '0' (hoan thanhf Task)
+                null, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
             // Sau khi cập nhật thành công, cập nhật lại danh sách công việc
             if (response.data.success) {
-                const updatedJobs = data.map(jobs => {
-                    if (jobs.id === jobId) {
-                        return { ...jobs, status: '0' };
-                    }
-                    return jobs;
-                });
-                setData(updatedJobs);
+                // Bởi vì phương thức PUT đã trả về controller có chức năng tự xử lí update trường status = 0 (xử lí phía backend) rồi nên ko cần xử lí phía frontend
+
+                // const updatedJobs = data.map(jobs => {
+                //     if (jobs.id === jobId) {
+                //         return { ...jobs, status: '0' };
+                //     }
+                //     return jobs;
+                // });
+                // setData(updatedJobs);
                 console.log('Đã đánh dấu hoàn thành');
+                window.location.reload();
             } else {
                 console.error('Không thể hoàn thành, có lỗi xảy ra');
             }
         } catch (error) {
-            console.error('Có lỗi xảy ra:', error);
+            console.error('Có lỗi xảy ra. Nội dung lỗi: ', error);
         }
     };
 

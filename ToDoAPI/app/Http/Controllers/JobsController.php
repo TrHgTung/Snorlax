@@ -66,7 +66,9 @@ class JobsController extends Controller
     
             $getJobsAuthorized->update($data);
             
-            return response()->json($data, 200);
+            return response()->json([
+                'message' => 'Đã cập nhật thông tin ID Task: '. $id
+            ], 200);
            
         }
         else{
@@ -94,7 +96,9 @@ class JobsController extends Controller
     
             $getJobsAuthorized->update($data);
             
-            return response()->json($data, 200);
+            return response()->json([
+                'message' => 'Đã đánh dấu hoàn thành cho ID Task: '. $id
+            ], 200);
         }
         else{
             return response()->json([
