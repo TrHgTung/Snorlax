@@ -2,9 +2,15 @@ import React, { Component, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Task from './Task';
 import { Navigate, useNavigate  } from 'react-router-dom';
+import Logout from './Logout';
+import { useAuth } from '../supports/AuthProvider';
 
 
 const Home = ()  => {
+  const [auth, setAuth] = useState({
+    token : localStorage.getItem('token') || null,
+    isAuthenticated : localStorage.getItem('token') ? true : false
+});
   // const [authenticate, setAuthenticate] = useState('');
   // useEffect(() => {
   //   const loggedInUser = localStorage.getItem("token");
@@ -29,11 +35,31 @@ const Home = ()  => {
   //         return <Navigate to="/list" />
   //     }
   // };
-
+  const navigate = useNavigate();
+  // const navLogout = () => {
+  //   navigate('/logout');
+  // }
+  const logout = () => {
+    localStorage.removeItem('token');
+    setAuth({ 
+        token: null,
+        isAuthenticated: false 
+    });
+    navigate('/login');
+}
   
     return (
       <div className='container'>
-        <h2 className='w-100 d-flex justify-content-center p-3 mb-4'>To-do list</h2>
+        <div className="row">
+          <div className="col-md-10">
+            <h2 className='w-100 d-flex justify-content-center p-3 mb-4'>To-do list</h2>
+          </div>
+          <div className="col-md-2">
+            <div className='mt-4'>
+              <button onClick={logout} className='btn btn-sm btn-danger'>Đăng xuất</button>
+            </div>
+          </div>
+        </div>
         <div className="row">
             <div className="col-md-4">
                 <h4>Add your tasks</h4>

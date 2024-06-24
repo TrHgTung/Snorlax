@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import { AuthProvider } from './supports/AuthProvider';
 import PrivateRoute from './supports/PrivateRoute';
+import Logout from './components/Logout';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                         } 
                     />
                     {/* Các route khác */}
+                    {/* <Route path="/logout" element={<Logout />} /> */}
                 </Routes>
         </AuthProvider>
     </Router>
