@@ -39,6 +39,33 @@ const Task = () => {
         return <div>Loading...</div>;
     }
   
+    const handleHoanThanhTask = async (jobId) => {
+        try {
+            const response = await axios.put(`http://127.0.0.1:4401/api/finish/job/${jobId}`, {
+                status: '0' // Cap nhat thanh '0' (hoan thanhf Task)
+            }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            // Sau khi cập nhật thành công, cập nhật lại danh sách công việc
+            if (response.data.success) {
+                const updatedJobs = data.map(jobs => {
+                    if (jobs.id === jobId) {
+                        return { ...jobs, status: '0' };
+                    }
+                    return jobs;
+                });
+                setData(updatedJobs);
+                console.log('Đã đánh dấu hoàn thành');
+            } else {
+                console.error('Không thể hoàn thành, có lỗi xảy ra');
+            }
+        } catch (error) {
+            console.error('Có lỗi xảy ra:', error);
+        }
+    };
+
     return (
       <div className='container'>
         <h4>Tasks List</h4>
@@ -60,7 +87,7 @@ const Task = () => {
                             <td>{jobs.content}</td>
                             <td>{jobs.deadline}</td>
                             <td>{jobs.priority_level}</td>
-                            <td><button className='btn btn-sm btn-secondary'>Hoàn thành</button></td>
+                            <td><button onClick={() => handleHoanThanhTask(jobs.id)} className='btn btn-sm btn-secondary'>Hoàn thành</button></td>
                         </tr>
                     )
                 ))}
