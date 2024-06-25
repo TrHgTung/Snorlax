@@ -47,9 +47,22 @@ class JobsController extends Controller
         return Jobs::create($data);
     }
 
-    // public function JobDetails($id){ // for testing API
-    //     return Jobs::find($id);
-    // } 
+    public function JobDetails($id){ // for testing API
+        $userId = auth()->user()->user_id;
+        $getData = Jobs::find($id);
+
+        if($userId == $getData->user_id){
+            return response([
+                'result' => $getData,
+            ], 200);
+        }
+        else{
+            return response([
+                'message' => 'Ban khong the truy cap noi dung nay (Unauthorized)',
+            ], 401);
+        }
+        
+    } 
 
     public function Update(Request $req, $id){
         $updateModifiedDate = (string)Carbon::now()->toDateString();

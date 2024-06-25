@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/jobs', [JobsController::class, 'GetAllJobs']);
     Route::get('/jobs/finished', [JobsController::class, 'XemCacJobsDaHoanThanh']);
     Route::post('/jobPost', [JobsController::class, 'AddJob']);
-    //Route::get('/job/{id}', [JobsController::class, 'JobDetails']);
+    Route::get('/job/{id}', [JobsController::class, 'JobDetails']);
     Route::put('/edit/job/{id}', [JobsController::class, 'Update']);
     Route::patch('/finish/job/{id}', [JobsController::class, 'Finish']);
     // Route::delete('/job/{id}', [JobsController::class, 'Destroy']);
