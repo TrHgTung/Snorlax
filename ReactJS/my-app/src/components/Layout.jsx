@@ -28,7 +28,7 @@ const Layout = ()  => {
 };
 
 const handleSubmit = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     try {
         const response = await axios.post('http://127.0.0.1:4401/api/jobPost', formData, {
             headers: {
@@ -36,7 +36,7 @@ const handleSubmit = async (e) => {
             }
         });
         if (response.data.success) {
-            console.log('Task added successfully:', response.data);
+            console.log('Task added successfully:', response.data.result);
             // Optionally reset form after successful submission
             setFormData({
                 content: '',

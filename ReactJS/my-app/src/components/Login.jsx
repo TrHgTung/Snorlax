@@ -29,12 +29,12 @@ const Login = () => {
             if (token) {
                 login(token); 
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                navigate('/list');
+                navigate('/');
             } else {
                 console.log('Token not found in response');
             }
             // console.log(JSON.stringify(response.data.token));
-            // navigate('/list');
+            // navigate('/');
         }
         catch (error) {
             console.log('Cannot authenticate due to an error');

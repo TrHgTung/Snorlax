@@ -7,6 +7,7 @@ import { AuthProvider } from './supports/AuthProvider';
 import PrivateRoute from './supports/PrivateRoute';
 import Logout from './components/Logout';
 import { render } from '@testing-library/react';
+import Update from './components/Update';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route 
-                        path="/list" 
+                        path="/" 
                         element={
                             <PrivateRoute>
                                 <Layout />
@@ -24,6 +25,7 @@ function App() {
                     />
                     {/* Các route khác */}
                     {/* <Route path="/logout" element={<Logout />} /> */}
+                    <Route path="/update/:id" element={<Update />} />
                 </Routes>
         </AuthProvider>
     </Router>

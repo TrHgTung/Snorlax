@@ -110,12 +110,12 @@ class JobsController extends Controller
             $getJobsAuthorized->update($data);
             
             return response()->json([
-                'message' => 'Đã đánh dấu hoàn thành cho ID Task: '. $id
+                'message' => 'Da danh dau hoan thanh cho ID Task: '. $id
             ], 200);
         }
         else{
             return response()->json([
-                'message' => 'Thao tác bị chặn, bạn không đủ quyền (Not Authorized)',
+                'message' => 'Thao tac bi chan vi ban khong du quyen (Not Authorized)',
             ], 401);
         }
     }

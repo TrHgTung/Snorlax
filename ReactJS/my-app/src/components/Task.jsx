@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../supports/AuthProvider';
 
@@ -16,6 +17,7 @@ const Task = () => {
     //     }
     const [data, setData] = useState('');
     const { auth } = useAuth();
+    const navigate = useNavigate();
     let stt = 1;
 
     useEffect(() => {
@@ -39,6 +41,10 @@ const Task = () => {
     if (!data) {
         return <div>Loading...</div>;
     }
+
+    const handleUpdateClick = (jobId) => {
+        navigate(`/update/${jobId}`);
+    };
   
     const handleHoanThanhTask = async (jobId) => {
         try {
@@ -98,7 +104,7 @@ const Task = () => {
                             <td>{jobs.deadline}</td>
                             <td>{jobs.priority_level}</td>
                             <td>
-                                <button onClick={ null } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
+                                <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
                                 <button onClick={ () => handleHoanThanhTask(jobs.id) } className='btn btn-sm btn-success ms-2'>Đánh dấu hoàn thành</button>
                             </td>
                         </tr>
