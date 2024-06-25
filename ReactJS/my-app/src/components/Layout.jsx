@@ -62,12 +62,12 @@ const handleSubmit = async (e) => {
     });
     navigate('/login');
 }
-  
+
     return (
       <div className='container'>
         <div className="row">
           <div className="col-md-10">
-            <h2 className='w-100 d-flex justify-content-center p-3 mb-4'>To-do list</h2>
+            <h2 className='w-100 d-flex justify-content-center p-3 mb-4'>Lời nhắc</h2>
           </div>
           <div className="col-md-2">
             <div className='mt-4'>
@@ -77,22 +77,22 @@ const handleSubmit = async (e) => {
         </div>
         <div className="row">
             <div className="col-md-4">
-                <h4>Add your tasks</h4>
+                <h4>Thêm lời nhắc của bạn</h4>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3 mt-3">
-                        <label htmlFor='content' className="form-label">Content:</label>
+                        <label htmlFor='content' className="form-label">Nội dung lời nhắc:</label>
                         <input type='text' 
                           className='form-control' 
                           id='content' 
                           name='content' 
-                          placeholder='Enter...' 
+                          placeholder='Nhập nội dung lời nhắc...' 
                           value={formData.content}
                           onChange={handleChange}
                         />
                     </div>
                     <div className="mb-3 mt-3">
-                        <label htmlFor='priority_level' className="form-label">Priority Level:</label>
-                        <input 
+                        <label htmlFor='priority_level' className="form-label">Mức ưu tiên:</label>
+                        {/* <input 
                           type="text"
                           className="form-control"
                           id="priority_level"
@@ -100,11 +100,22 @@ const handleSubmit = async (e) => {
                           placeholder="Enter..."
                           value={formData.priority_level}
                           onChange={handleChange}
-                        />
+                        /> */}
+                        <select
+                          name="priority_level"
+                          id="priority_level"
+                          className='form-control'
+                          value={formData.priority_level}
+                          onChange={handleChange}
+                        >
+                          <option className='text-success font-weight-bold' value="1">Mặc định</option>
+                          <option className='text-warning font-weight-bold' value="2">Vừa phải</option>
+                          <option className='text-danger font-weight-bold' value="3">Cao</option>
+                        </select>
                     </div>
                     <div className="mb-3 mt-3">
-                        <label htmlFor='deadline' className="form-label">Third element:</label>
-                        <input 
+                        <label htmlFor='deadline' className="form-label">Thời hạn:</label>
+                        {/* <input 
                           type="text"
                           className="form-control"
                           id="deadline"
@@ -112,9 +123,19 @@ const handleSubmit = async (e) => {
                           placeholder="Enter..."
                           value={formData.deadline}
                           onChange={handleChange}
-                        />
+                        /> */}
+                        <input 
+                          type="datetime-local" 
+                          id="deadline" 
+                          name="deadline" 
+                          min="2024-01-01T00:00" 
+                          max="2038-01-19T03:14"
+                          className='form-control'
+                          value={formData.deadline}
+                          onChange={handleChange}
+                        ></input>
                     </div>
-                    <button type="submit" className='btn btn-primary mb-3'>Add this task</button>
+                    <button type="submit" className='btn btn-primary mb-3'>Thêm lời nhắc</button>
                 </form>
             </div>
             <div className="col-md-8">         

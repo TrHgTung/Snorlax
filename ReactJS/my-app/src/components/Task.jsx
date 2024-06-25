@@ -39,7 +39,7 @@ const Task = () => {
     }, [auth.token]);     
     
     if (!data) {
-        return <div>Loading...</div>;
+        return <div>Đang tải dữ liệu...</div>;
     }
 
     const handleUpdateClick = (jobId) => {
@@ -84,7 +84,7 @@ const Task = () => {
 
     return (
       <div className='container'>
-        <h4>Tasks List</h4>
+        <h4>Danh sách lời nhắc cần hoàn thành</h4>
         <table className="table table-striped">
             <thead>
                 <tr>
@@ -93,6 +93,7 @@ const Task = () => {
                     <th scope="col">Thời hạn</th>
                     <th scope="col">Mức ưu tiên</th>
                     <th scope="col">Cập nhật công việc</th>
+                    <th scope="col">Hoàn thành công việc</th>
                 </tr>
             </thead>
             <tbody>
@@ -105,7 +106,9 @@ const Task = () => {
                             <td>{jobs.priority_level}</td>
                             <td>
                                 <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
-                                <button onClick={ () => handleHoanThanhTask(jobs.id) } className='btn btn-sm btn-success ms-2'>Đánh dấu hoàn thành</button>
+                            </td>
+                            <td>
+                                <button onClick={ () => handleHoanThanhTask(jobs.id) } className='btn btn-sm btn-success ms-2'>Đánh dấu h.tất</button>
                             </td>
                         </tr>
                     )

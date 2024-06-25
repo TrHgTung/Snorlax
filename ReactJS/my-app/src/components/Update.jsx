@@ -65,26 +65,27 @@ const Update = () => {
     }
 
   return (
-    <div className='container'>
+    <div className='container mt-3'>
+        <a href="/" style={{ textDecoration: 'none' }}>&lt; Quay lại</a>
         <div className="row">
             <div className="col-md-4 mt-4">
-                <h4>Update cho mục {id}</h4>
+                <h4>Sửa lại mục {id}</h4>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3 mt-3">
-                        <label htmlFor="content" className="form-label">Content:</label>
+                        <label htmlFor="content" className="form-label">Nội dung lời nhắc:</label>
                         <input
                             type="text"
                             className="form-control"
                             id="content"
                             name="content"
-                            placeholder="Enter..."
+                            placeholder="Nhập nội dung lời nhắc"
                             value={formData.content}
                             onChange={handleChange}
                         />
                     </div>
                     <div className="mb-3 mt-3">
-                        <label htmlFor="priority_level" className="form-label">Priority Level:</label>
-                        <input
+                        <label htmlFor="priority_level" className="form-label">Mức ưu tiên:</label>
+                        {/* <input
                             type="text"
                             className="form-control"
                             id="priority_level"
@@ -92,11 +93,22 @@ const Update = () => {
                             placeholder="Enter..."
                             value={formData.priority_level}
                             onChange={handleChange}
-                        />
+                        /> */}
+                        <select
+                          name="priority_level"
+                          id="priority_level"
+                          className='form-control'
+                          value={formData.priority_level}
+                          onChange={handleChange}
+                        >
+                          <option className='text-success font-weight-bold' value="1">Mặc định</option>
+                          <option className='text-warning font-weight-bold' value="2">Vừa phải</option>
+                          <option className='text-danger font-weight-bold' value="3">Cao</option>
+                        </select>
                     </div>
                     <div className="mb-3 mt-3">
-                        <label htmlFor="deadline" className="form-label">Deadline:</label>
-                        <input
+                        <label htmlFor="deadline" className="form-label">Thời hạn:</label>
+                        {/* <input
                             type="text"
                             className="form-control"
                             id="deadline"
@@ -104,9 +116,19 @@ const Update = () => {
                             placeholder="Enter..."
                             value={formData.deadline}
                             onChange={handleChange}
-                        />
+                        /> */}
+                        <input 
+                          type="datetime-local" 
+                          id="deadline" 
+                          name="deadline" 
+                          min="2024-01-01T00:00" 
+                          max="2038-01-19T03:14"
+                          className='form-control'
+                          value={formData.deadline}
+                          onChange={handleChange}
+                        ></input>
                     </div>
-                    <button type="submit" className="btn btn-primary mb-3">Update</button>
+                    <button type="submit" className="btn btn-primary mb-3">Cập nhật</button>
                 </form>
             </div>
         </div>
