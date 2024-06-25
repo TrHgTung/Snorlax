@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Update = () => {
     const { id } = useParams(); // Lấy jobId từ URL
     const navigate = useNavigate();
-
     const [formData, setFormData] = useState({
         content: '',
         priority_level: '',
@@ -21,7 +20,8 @@ const Update = () => {
                     }
                 });
                 setFormData(response.data.result);
-                // console.log(response.data.result)
+                
+                // console.log(getName)
             }
             catch(error){
                 console.log('Error', error);
@@ -69,7 +69,7 @@ const Update = () => {
         <a href="/" style={{ textDecoration: 'none' }}>&lt; Quay lại</a>
         <div className="row">
             <div className="col-md-4 mt-4">
-                <h4>Sửa lại mục {id}</h4>
+                <h4>Sửa lại mục <i>{formData.content}</i></h4>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3 mt-3">
                         <label htmlFor="content" className="form-label">Nội dung lời nhắc:</label>
