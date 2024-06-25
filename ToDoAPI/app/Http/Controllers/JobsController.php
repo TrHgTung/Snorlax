@@ -58,7 +58,7 @@ class JobsController extends Controller
         $getJobsAuthorized = Jobs::where('user_id', $userId)->where('status', '1')->where('id', $id)->first(); // chỉ lấy những job có userId được authorized
 
         if (!$getJobsAuthorized) {
-            return response()->json(['error' => 'Không tìm thấy'], 404);
+            return response()->json(['error' => 'Khong tim thay'], 404);
         }
         else if($getJobsAuthorized){
             $data = $req->all();
@@ -67,13 +67,13 @@ class JobsController extends Controller
             $getJobsAuthorized->update($data);
             
             return response()->json([
-                'message' => 'Đã cập nhật thông tin ID Task: '. $id
+                'message' => 'Da cap nhat thong tin cho ID Task: '. $id
             ], 200);
            
         }
         else{
             return response()->json([
-                'message' => 'Thao tác bị chặn, bạn không đủ quyền (Not Authorized)',
+                'message' => 'Thao tac bi chan vi ban khong du quyen (Not Authorized)',
             ], 401);
         }
         //  echo $getJobsAuthorized;

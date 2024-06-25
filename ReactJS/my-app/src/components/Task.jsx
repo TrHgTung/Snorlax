@@ -16,6 +16,7 @@ const Task = () => {
     //     }
     const [data, setData] = useState('');
     const { auth } = useAuth();
+    let stt = 1;
 
     useEffect(() => {
         const validToken = localStorage.getItem("token");
@@ -41,12 +42,16 @@ const Task = () => {
   
     const handleHoanThanhTask = async (jobId) => {
         try {
-            const response = await axios.put(`http://127.0.0.1:4401/api/finish/job/${jobId}`, 
+            await axios.get('http://127.0.0.1:4401/sanctum/csrf-cookie', { withCredentials: true });
+            const response = await axios.patch(`http://127.0.0.1:4401/api/finish/job/${jobId}`, 
                 // status: '0' // Cap nhat thanh '0' (hoan thanhf Task)
                 null, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
+                    "Accept-Language": "en-US,en;q=0.9",
+                    'Content-Type': 'application/json',
+                    'Charset':'utf-8',
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
             });
             // Sau khi cập nhật thành công, cập nhật lại danh sách công việc
             if (response.data.success) {
@@ -59,9 +64,11 @@ const Task = () => {
                 //     return jobs;
                 // });
                 // setData(updatedJobs);
+                // console.log(response.headers)
                 console.log('Đã đánh dấu hoàn thành');
                 window.location.reload();
             } else {
+                // console.log(response.headers)
                 console.error('Không thể hoàn thành, có lỗi xảy ra');
             }
         } catch (error) {
@@ -72,25 +79,28 @@ const Task = () => {
     return (
       <div className='container'>
         <h4>Tasks List</h4>
-        <table class="table table-striped">
+        <table className="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">STT</th>
                     <th scope="col">Nội dung công việc</th>
                     <th scope="col">Thời hạn</th>
                     <th scope="col">Mức ưu tiên</th>
-                    <th scope="col">Đánh dấu hoàn thành</th>
+                    <th scope="col">Cập nhật công việc</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map(jobs => (
                     jobs.status === '1' && (
                         <tr key={jobs.id}>
-                            <td>{jobs.id}</td>
+                            <td>{stt++}</td>
                             <td>{jobs.content}</td>
                             <td>{jobs.deadline}</td>
                             <td>{jobs.priority_level}</td>
-                            <td><button onClick={() => handleHoanThanhTask(jobs.id)} className='btn btn-sm btn-secondary'>Hoàn thành</button></td>
+                            <td>
+                                <button onClick={ null } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
+                                <button onClick={ () => handleHoanThanhTask(jobs.id) } className='btn btn-sm btn-success ms-2'>Đánh dấu hoàn thành</button>
+                            </td>
                         </tr>
                     )
                 ))}
