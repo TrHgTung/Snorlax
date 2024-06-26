@@ -52,22 +52,26 @@ const Layout = ()  => {
     }
   };
 
-  const originUsername = localStorage.getItem('username');
-  const [username, setUsername] = useState('');
+  const display_name = localStorage.getItem('display_name');
+  const assist_id = localStorage.getItem('assist_id');
+  // const [username, setUsername] = useState('');
 
-  useEffect(() => {
-    if(originUsername) {
-      const parts = originUsername.split('@'); // Tách email thành mảng gồm phần trước và sau dấu @
-      if (parts.length > 0) {
-          setUsername(parts[0]); // Lấy phần tử đầu tiên là phần trước dấu @
-      }
-    }
-  }, [originUsername]);
+  // useEffect(() => {
+  //   if(originUsername) {
+  //     const parts = originUsername.split('@'); // Tách email thành mảng gồm phần trước và sau dấu @
+  //     if (parts.length > 0) {
+  //         setUsername(parts[0]); // Lấy phần tử đầu tiên là phần trước dấu @
+  //     }
+  //   }
+  // }, [originUsername]);
 
   const navigate = useNavigate();
  
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('assist_id');
+    localStorage.removeItem('display_name');
     setAuth({ 
         token: null,
         isAuthenticated: false 
@@ -89,7 +93,18 @@ const Layout = ()  => {
         <div className="row">
           <div className="col-md-10 text-center mb-4 mt-3">
             <h2 className='w-100 d-flex justify-content-center'>Lời nhắc</h2>
-            <small><i>Người dùng: @{username}</i></small>
+            <small><i>Người dùng: @{display_name} - Trợ lý:  
+                {assist_id === '1' && ' Venusaur'}
+                {assist_id === '2' && ' Pikachu'}
+                {assist_id === '3' && ' Charizard'}
+                {assist_id === '4' && ' Umbreon'}
+                {assist_id === '5' && ' Lapras'}
+                {(assist_id !== '1' 
+                && assist_id !== '2' 
+                && assist_id !== '3'  
+                && assist_id !== '4'  
+                && assist_id !== '5') && ' Không có'}
+            </i></small>
           </div>
           <div className="col-md-2">
             <div className='mt-4'>

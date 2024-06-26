@@ -31,6 +31,7 @@ const Task = () => {
                     }
                 });
                 setData(response.data.result);
+                
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -98,23 +99,29 @@ const Task = () => {
                 </tr>
             </thead>
             <tbody>
-                {data.map(jobs => (
-                    jobs.status === '1' && (
-                        <tr key={jobs.id}>
-                            <td>{stt++}</td>
-                            <td>{jobs.content}</td>
-                            <td>{jobs.deadline}</td>
-                            {/* <td>{jobs.priority_level}</td> */}
-                            {jobs.priority_level === '1' && <p className='text-success'><BsEmojiSmile /> Thấp</p>}
-                            {jobs.priority_level === '2' && <p className='text-warning'><BsEmojiAstonished /> Trung bình</p>}
-                            {jobs.priority_level === '3' && <p className='text-danger'><BsEmojiAngry /> Cao</p>}
-                            <td>
-                                <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
-                            </td>
-                            <td>
-                                <button onClick={ () => handleHoanThanhTask(jobs.id) } className='btn btn-sm btn-success ms-2'>Đánh dấu h.tất</button>
-                            </td>
-                        </tr>
+                {data.length === 0 ? (
+                    <tr>
+                        <td colSpan="6" className="text-center">Không có lời nhắc khả dụng</td>
+                    </tr>
+                ) : (
+                        data.map(jobs => (
+                        jobs.status === '1' && (
+                            <tr key={jobs.id}>
+                                <td>{stt++}</td>
+                                <td>{jobs.content}</td>
+                                <td>{jobs.deadline}</td>
+                                {/* <td>{jobs.priority_level}</td> */}
+                                {jobs.priority_level === '1' && <p className='text-success'><BsEmojiSmile /> Thấp</p>}
+                                {jobs.priority_level === '2' && <p className='text-warning'><BsEmojiAstonished /> Trung bình</p>}
+                                {jobs.priority_level === '3' && <p className='text-danger'><BsEmojiAngry /> Cao</p>}
+                                <td>
+                                    <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
+                                </td>
+                                <td>
+                                    <button onClick={ () => handleHoanThanhTask(jobs.id) } className='btn btn-sm btn-success ms-2'>Đánh dấu h.tất</button>
+                                </td>
+                            </tr>
+                        )
                     )
                 ))}
             </tbody>

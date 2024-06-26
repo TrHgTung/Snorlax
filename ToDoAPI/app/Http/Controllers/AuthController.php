@@ -53,9 +53,13 @@ class AuthController extends Controller
             ], 401);
         }
          
+        $assistId = $getUserByEmail->assist_id;
+        $displayName = $getUserByEmail->display_name;
         $token = $getUserByEmail->createToken('myapptoken')->plainTextToken;
         $response = [
             'user' => $getUserByEmail,
+            'assist_id' => $assistId,
+            'display_name' => $displayName,
             'token' => $token, // token để authenticate tính năng dưới dạng Bearer Token (Postman)
         ];
 
