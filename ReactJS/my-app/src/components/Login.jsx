@@ -1,7 +1,8 @@
 import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate  } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import { useAuth } from '../supports/AuthProvider';
+import { toast } from 'react-toastify';
 
 axios.defaults.withCredentials = true;
 
@@ -29,35 +30,68 @@ const Login = () => {
             if (token) {
                 login(token); 
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                toast.success('Đăng nhập thành công!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
                 navigate('/');
             } else {
-                console.log('Token not found in response');
+                console.log('Đăng nhập thất bại (no token found');
+                toast.error('Đăng nhập thất bại.', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             }
             // console.log(JSON.stringify(response.data.token));
             // navigate('/');
         }
         catch (error) {
-            console.log('Cannot authenticate due to an error');
+            toast.error('Login failed. Please try again.', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            console.log('Đăng nhập thất bại (cannot authenticate)');
         }
     };
   
     return (
         
         <div className='container'>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} autocomplete='off'>
                 <div className="row">
-                    <div className="col-md-4">
-                    <h2 className='w-100 d-flex justify-content-center p-3 mb-4'>Please sign in</h2>
+                    <div className="col-md-6">
+                    <h2 className='w-100 d-flex justify-content-center p-3'>Yêu cầu xác thực người dùng</h2>
+                        <div className="form-floating text-center">
+                            <i>Bạn phải đăng nhập để có thể xem được các lời nhắc của mình</i>
+                        </div>
                         <div class="form-floating mt-4">
-                            <label htmlFor='email'>Email:</label>
+                            <label htmlFor='email'>E-mail đăng nhập:</label>
                             <input type="email" class="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                         </div>
-                        <div class="form-floating mt-4 mb-4">
-                            <label htmlFor='password'>Password:</label>
+                        <div class="form-floating mt-4 mb-4">   
+                            <label htmlFor='password'>Mật khẩu:</label>
                             <input type="password" class="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                         </div>
-                        <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+                        <button class="btn btn-primary w-100 py-2" type="submit">Đăng nhập</button>
                         {error && <p>{error}</p>}
+                        <div className='mt-3'>
+                            <p>Bạn chưa có tài khoản? Hãy bắt đầu <Link to="/register">đăng ký sử dụng Lời nhắc</Link></p>
+                        </div>
                     </div>
                 </div>
                 

@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
                 isAuthenticated: true 
             });
         } else {
-            navigate('/login');
+             navigate('/login');
         }
     }, [navigate]);
 
