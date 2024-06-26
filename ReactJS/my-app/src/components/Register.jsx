@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Register = () => {
@@ -20,7 +20,7 @@ const Register = () => {
     };
 
     const handleRegister = async (e) => { // kiem tra xac nhan password
-        e.preventDefault();
+        //e.preventDefault();
         if(formData.password != formData.confirm_password){
             toast.error('Mật khẩu nhập lại không chính xác');
             return;
@@ -35,15 +35,23 @@ const Register = () => {
 
             if(response.data.success){
                 toast.success('Đăng ký thành công. Hãy đăng nhập bằng tài khoản của bạn');
+
+                // const min = 1111;
+                // const max = 9999;
+                // const rand = min + Math.random() * (max - min);
+                // localStorage.setItem('check_register', rand);
                 navigate('/login');
+                // console.log(response.data)
             }
             else{
-                toast.error('Có lỗi xảy ra. Hãy thử lại');
-
+                navigate('/login');
+                toast.error('Có lỗi xảy ra (else). Hãy thử lại');
+                // console.log(response.data)
             }
         }
         catch (error){
-            toast.error('Có lỗi xảy ra. Hãy thử lại');
+            navigate('/register');
+            toast.error('Có lỗi xảy ra (catch execption). Hãy thử lại');
         }
     };
 
@@ -51,8 +59,12 @@ const Register = () => {
     <div className="container">
             <form onSubmit={handleRegister}>
                 <div className="row">
-                    <div className="col-md-4">
-                        <h2 className='w-100 d-flex justify-content-center p-3 mb-4'>Register</h2>
+                    <div className="col-md-6">
+                        {/* Chen hinh anh */}
+                    </div>
+                    <div className="col-md-6">
+                        <h2 className='w-100 d-flex justify-content-center p-3 mt-3'>Đăng ký sử dụng</h2>
+                        <p className='text-center'><i>Hãy bắt đầu sử dụng Lời nhắc</i></p>
                         <div className="form-floating mt-4">
                             <label htmlFor='display_name'>Tên hiển thị:</label>
                             <input 
@@ -102,6 +114,9 @@ const Register = () => {
                             />
                         </div>
                         <button className="btn btn-primary w-100 py-2" type="submit">Đăng ký</button>
+                        <div className='mt-3'>
+                            <p>Đã có tài khoản? <Link to="/login">Quay về đăng nhập</Link></p>
+                        </div>
                     </div>
                 </div>
             </form>

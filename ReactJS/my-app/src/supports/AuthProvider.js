@@ -10,22 +10,29 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({
         token : localStorage.getItem('token') || null,
-        isAuthenticated : localStorage.getItem('token') ? true : false
+        isAuthenticated : !!localStorage.getItem('token')
     });
+    const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (localStorage.getItem('token')) {
+        if (token) {
             setAuth({ 
                 token: token, 
                 isAuthenticated: true 
             });
-        } else {
-             navigate('/login');
+        } 
+        setLoading(false);
+    }, []);
+
+    useEffect(() => {
+        if(!loading && !auth.isAuthenticated){
+        // navigate('/login');
         }
-    }, [navigate]);
+    }, [loading, auth.isAuthenticated, navigate]);
+
 
     const login = (token) => {
         localStorage.setItem('token', token);
@@ -33,6 +40,7 @@ export const AuthProvider = ({ children }) => {
             token: token, 
             isAuthenticated: true 
         });
+        navigate('/');
     };
 
     const logout = () => {
@@ -43,6 +51,14 @@ export const AuthProvider = ({ children }) => {
         });
         navigate('/login');
     };
+
+    if(loading) {
+        return (
+            <div>
+                <p>Đang tải nội dung...</p>
+            </div>
+        );
+    }
 
     return (
         <AuthContext.Provider value={{ auth, login, logout }}>

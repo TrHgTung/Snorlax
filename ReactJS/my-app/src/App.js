@@ -6,7 +6,6 @@ import Register from './components/Register';
 import Layout from './components/Layout';
 import { AuthProvider } from './supports/AuthProvider';
 import PrivateRoute from './supports/PrivateRoute';
-// import Logout from './components/Logout';
 import { render } from '@testing-library/react';
 import Update from './components/Update';
 import { ToastContainer } from 'react-toastify';
@@ -15,9 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <Router>
-      {/* <Routes>
-        <Route path="/register" element={<Register />} />
-      </Routes> */}
       <AuthProvider>
                 <Routes>
                     <Route path="/login" element={<Login />} />
@@ -30,8 +26,6 @@ function App() {
                             </PrivateRoute>
                         } 
                     />
-                    {/* Các route khác */}
-                    {/* <Route path="/logout" element={<Logout />} /> */}
                     <Route 
                       path="/update/:id" 
                       element={
