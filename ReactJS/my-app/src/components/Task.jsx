@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../supports/AuthProvider';
+import { BsEmojiSmile, BsEmojiAstonished, BsEmojiAngry } from "react-icons/bs";
 
 const Task = () => {
     // useEffect(() => {
@@ -103,7 +104,10 @@ const Task = () => {
                             <td>{stt++}</td>
                             <td>{jobs.content}</td>
                             <td>{jobs.deadline}</td>
-                            <td>{jobs.priority_level}</td>
+                            {/* <td>{jobs.priority_level}</td> */}
+                            {jobs.priority_level === '1' && <p className='text-success'><BsEmojiSmile /> Thấp</p>}
+                            {jobs.priority_level === '2' && <p className='text-warning'><BsEmojiAstonished /> Trung bình</p>}
+                            {jobs.priority_level === '3' && <p className='text-danger'><BsEmojiAngry /> Cao</p>}
                             <td>
                                 <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
                             </td>

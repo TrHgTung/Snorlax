@@ -20,37 +20,29 @@ const Register = () => {
     };
 
     const handleRegister = async (e) => { // kiem tra xac nhan password
-        //e.preventDefault();
+        e.preventDefault();
         if(formData.password != formData.confirm_password){
             toast.error('Mật khẩu nhập lại không chính xác');
             return;
         }
 
         try{
+            //await axios.get('http://127.0.0.1:4401/sanctum/csrf-cookie', { withCredentials: true });
             const response = await axios.post('http://127.0.0.1:4401/api/register', {
                 display_name: formData.display_name,
                 email: formData.email,
                 password: formData.password
-            });
+            },  { withCredentials: true });
 
             if(response.data.success){
                 toast.success('Đăng ký thành công. Hãy đăng nhập bằng tài khoản của bạn');
-
-                // const min = 1111;
-                // const max = 9999;
-                // const rand = min + Math.random() * (max - min);
-                // localStorage.setItem('check_register', rand);
-                navigate('/login');
-                // console.log(response.data)
             }
             else{
-                navigate('/login');
-                toast.error('Có lỗi xảy ra (else). Hãy thử lại');
-                // console.log(response.data)
+                toast.warning('Đăng ký thành công. Hãy đăng nhập bằng tài khoản của bạn');
+                // toast.error('Có lỗi xảy ra (else). Hãy thử lại');
             }
         }
         catch (error){
-            navigate('/register');
             toast.error('Có lỗi xảy ra (catch execption). Hãy thử lại');
         }
     };

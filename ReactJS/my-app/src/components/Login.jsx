@@ -56,7 +56,7 @@ const Login = () => {
             // navigate('/');
         }
         catch (error) {
-            toast.error('Login failed. Please try again.', {
+            toast.error('Đăng nhập thất bại.', {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
