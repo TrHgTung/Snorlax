@@ -11,7 +11,7 @@ class Assistants extends Model
     protected $fillable = [
         'assist_id',
         'job_id',
-        'character_id'
+        'character_id',
     ];
     public $timestamps = false;
    

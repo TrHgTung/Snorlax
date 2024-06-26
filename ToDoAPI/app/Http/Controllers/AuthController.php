@@ -25,9 +25,11 @@ class AuthController extends Controller
             'email' => $fields['email'],
             'display_name' => $fields['display_name'],
             'password' => bcrypt($fields['password']),
+            'assist_id' => $fields['assist_id'],
         ]);
         $token = $user->createToken('myapptoken')->plainTextToken;
         $response = [
+            'assist_id' => $fields['assist_id'],
             'user' => $user,
             'token' => $token, // token để authenticate tính năng dưới dạng Bearer Token (Postman)
         ];

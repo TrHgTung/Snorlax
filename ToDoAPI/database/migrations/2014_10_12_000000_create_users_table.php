@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('display_name');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('assist_id');
             $table->rememberToken();
             $table->timestamps();
         });
