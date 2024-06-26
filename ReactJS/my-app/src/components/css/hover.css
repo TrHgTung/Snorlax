@@ -1,9 +1,18 @@
 .img-need-hover {
     /* background-color: transparent; */
     transition: transform 0.3s ease;
-    margin-left: 80%;
+    /* margin-left: 80%; */
 }
 
 .img-need-hover:hover {
+    transform: scale(1.2);
+}
+.img-need-hover-login {
+    /* background-color: transparent; */
+    transition: transform 0.3s ease;
+    margin-left: 80%;
+}
+
+.img-need-hover-login:hover {
     transform: scale(1.2);
 }

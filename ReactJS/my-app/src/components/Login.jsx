@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate  } from 'react-router-dom';
 import { useAuth } from '../supports/AuthProvider';
+import bg from './inline-img/bg/0.PNG';
 import { toast } from 'react-toastify';
 
 axios.defaults.withCredentials = true;
@@ -84,6 +85,9 @@ const Login = () => {
             <form onSubmit={handleLogin} autoComplete='off'>
                 <div className="row">
                     <div className="col-md-6">
+                        <img src={bg} alt="review-pokemon" />
+                    </div>
+                    <div className="col-md-6">
                     <h2 className='w-100 d-flex justify-content-center p-3'>Yêu cầu xác thực người dùng</h2>
                         <div className="form-floating text-center">
                             <i>Bạn phải đăng nhập để có thể xem được các lời nhắc của mình</i>
@@ -102,8 +106,10 @@ const Login = () => {
                             <p>Bạn chưa có tài khoản? Hãy bắt đầu <Link to="/register">đăng ký sử dụng Lời nhắc</Link></p>
                         </div>
                     </div>
+                    
                 </div>
-                
+                <p><strong>Hình ảnh</strong>: <i>The Pokémon Company / Game Freak / Nintendo (1996) &copy; Pokémon</i></p>
+                <p><strong>Mã nguồn</strong>: <i>Hoàng Tùng</i></p>
             </form>
         </div>
     )

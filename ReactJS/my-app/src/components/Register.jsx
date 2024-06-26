@@ -142,7 +142,9 @@ const Register = () => {
                     <div>
                         <p className='p-0.25'>*: Dấu cộng đặt trước tên Pokémon, tức là sẽ có sự xuất hiện của tất cả dạng tiến hóa của Pokémon đó</p>
                         <p className='p-0.25'>**: Trợ lý sẽ sử dụng hình ảnh của Pokémon*** mà bạn đã đăng ký cùng với tài khoản, để đồng hành và hỗ trợ bạn hoàn thành tất cả các lời nhắc đúng hạn.</p>
-                        <p className='p-0.25'>***: Pokémon is a Japanese media franchise consisting of video games, animated series and films, a trading card game, and other related media. <br /><b>Tác quyền:</b> <i> The Pokémon Company, GameFreak, Nintendo</i></p>
+                        <p className='p-0.25'>***: Pokémon is a Japanese media franchise consisting of video games, animated series and films, a trading card game, and other related media. </p><br />
+                        <p><b>Tác quyền & Hình ảnh (<i>Pokémon &copy;</i>):</b> <i> The Pokémon Company, GameFreak, Nintendo</i></p>
+                        <p><strong>Mã nguồn</strong>: <i>Hoàng Tùng</i></p>
                     </div>
                 </div>
             </form>
