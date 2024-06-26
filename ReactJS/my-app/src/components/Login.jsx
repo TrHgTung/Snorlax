@@ -46,6 +46,7 @@ const Login = () => {
                 localStorage.setItem('username', email);
                 localStorage.setItem('assist_id', response.data.assist_id);
                 localStorage.setItem('display_name', response.data.display_name);
+                localStorage.setItem('pokemon_name', response.data.pokemon_name);
                 // localStorage.setItem('assist_id2', assist);
                 navigate('/');
             } else {

@@ -54,11 +54,33 @@ class AuthController extends Controller
         }
          
         $assistId = $getUserByEmail->assist_id;
+        $pokemon = '';
+        switch($assistId){
+            case "1":
+                $pokemon = "Venusaur";
+                break;
+            case "2":
+                $pokemon = "Pikachu";
+                break;
+            case "3":
+                $pokemon = "Charizard";
+                break;
+            case "4":
+                $pokemon = "Umbreon";
+                break;
+            case "5":
+                $pokemon = "Lapras";
+                break;
+            default:
+                $pokemon = "null";
+        }
+
         $displayName = $getUserByEmail->display_name;
         $token = $getUserByEmail->createToken('myapptoken')->plainTextToken;
         $response = [
             'user' => $getUserByEmail,
             'assist_id' => $assistId,
+            'pokemon_name' => $pokemon,
             'display_name' => $displayName,
             'token' => $token, // token để authenticate tính năng dưới dạng Bearer Token (Postman)
         ];

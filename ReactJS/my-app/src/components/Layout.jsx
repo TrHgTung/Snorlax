@@ -6,6 +6,7 @@ import { Navigate, useNavigate  } from 'react-router-dom';
 import { useAuth } from '../supports/AuthProvider';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import './css/hover.css';
 
 
 const Layout = ()  => {
@@ -72,6 +73,7 @@ const Layout = ()  => {
     localStorage.removeItem('username');
     localStorage.removeItem('assist_id');
     localStorage.removeItem('display_name');
+    localStorage.removeItem('pokemon_name');
     setAuth({ 
         token: null,
         isAuthenticated: false 

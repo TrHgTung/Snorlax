@@ -17,9 +17,12 @@ const Task = () => {
     //         console.log('Cannot authenticate due to an error');
     //     }
     const [data, setData] = useState('');
+    // const [pokemonName, setPokemonName] = useState('');
     const { auth } = useAuth();
     const navigate = useNavigate();
     let stt = 1;
+    const pokemonName = localStorage.getItem('pokemon_name');
+    const assistId = localStorage.getItem('assist_id');
 
     useEffect(() => {
         const validToken = localStorage.getItem("token");
@@ -31,7 +34,7 @@ const Task = () => {
                     }
                 });
                 setData(response.data.result);
-                
+                // setPokemonName(response.data.pokemon_name);                
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -126,6 +129,11 @@ const Task = () => {
                 ))}
             </tbody>
         </table>
+        <div>
+           {assistId !== '0' && data.length !== 0 && <img src={`/assets/${assistId}.png`} className='img-need-hover' alt={`${pokemonName}`} title={`${pokemonName} thắc mắc rằng bạn đã hoàn thành mọi công việc hay chưa?`} width={`40%`} height={`30%`} />}
+           {assistId === '0' && <></>}
+           {assistId !== '0' && data.length === 0 && <img src={`/assets/${assistId}.png`} className='img-need-hover' alt={`${pokemonName}`} title={`${pokemonName} đang vui vẻ vì bạn đang rảnh rỗi`} width={`40%`} height={`30%`} />}
+        </div>
       </div>
     )
   }

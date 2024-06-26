@@ -60,9 +60,10 @@ const Register = () => {
     <div className="container">
             <form onSubmit={handleRegister}>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-6 mt-5">
+                        <i>Hình ảnh về trợ thủ của bạn sẽ xuất hiện tại đây</i>
                         {/* Chen hinh anh bang cach bat su kien click option */}
-                        {selectOption !== '0' && <img src={`/assets/${selectOption}.png`} />}
+                        {selectOption !== '0' && <img src={`/assets/${selectOption}.png`} className='img-need-hover' alt=''/>}
                     </div>
                     <div className="col-md-6">
                         <h2 className='w-100 d-flex justify-content-center p-3 mt-3'>Đăng ký sử dụng</h2>
