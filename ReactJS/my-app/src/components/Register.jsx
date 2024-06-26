@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import bg from '../assets/not_transparent/0.PNG';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -10,10 +9,13 @@ const Register = () => {
         email: '',
         password: '', 
         confirm_password: '', 
+        assist_id: '', 
     });
+    const [selectOption, setSelectOption] = useState('0');
     const navigate = useNavigate();
 
     const handleChange = (e) => {
+        setSelectOption(e.target.value);
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
@@ -32,7 +34,8 @@ const Register = () => {
             const response = await axios.post('http://127.0.0.1:4401/api/register', {
                 display_name: formData.display_name,
                 email: formData.email,
-                password: formData.password
+                password: formData.password,
+                assist_id: formData.assist_id,
             },  { withCredentials: true });
 
             if(response.data.success){
@@ -48,13 +51,18 @@ const Register = () => {
         }
     };
 
+    // const [selectOption, setSelectOption] = useState('0');
+    // const handleSelectOptionChange = (e) => {
+    //     setSelectOption(e.target.value);
+    // }
+
   return (
     <div className="container">
             <form onSubmit={handleRegister}>
                 <div className="row">
                     <div className="col-md-6">
-                        {/* Chen hinh anh */}
-                        <img src={bg} alt="review-pokemon" />
+                        {/* Chen hinh anh bang cach bat su kien click option */}
+                        {selectOption !== '0' && <img src={`/assets/${selectOption}.png`} />}
                     </div>
                     <div className="col-md-6">
                         <h2 className='w-100 d-flex justify-content-center p-3 mt-3'>Đăng ký sử dụng</h2>
@@ -133,7 +141,7 @@ const Register = () => {
                     <div>
                         <p className='p-0.25'>*: Dấu cộng đặt trước tên Pokémon, tức là sẽ có sự xuất hiện của tất cả dạng tiến hóa của Pokémon đó</p>
                         <p className='p-0.25'>**: Trợ lý sẽ sử dụng hình ảnh của Pokémon*** mà bạn đã đăng ký cùng với tài khoản, để đồng hành và hỗ trợ bạn hoàn thành tất cả các lời nhắc đúng hạn.</p>
-                        <p className='p-0.25'>***: Pokémon is a Japanese media franchise consisting of video games, animated series and films, a trading card game, and other related media. <br />Tác giả sở hữu: <i> The Pokémon Company, GameFreak, Nintendo</i></p>
+                        <p className='p-0.25'>***: Pokémon is a Japanese media franchise consisting of video games, animated series and films, a trading card game, and other related media. <br /><b>Tác quyền:</b> <i> The Pokémon Company, GameFreak, Nintendo</i></p>
                     </div>
                 </div>
             </form>

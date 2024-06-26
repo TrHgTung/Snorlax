@@ -16,6 +16,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'display_name' => 'required|string',
             'password' => 'required|string',
+            'assist_id' => 'required|string',
         ]);
 
         // post User data
