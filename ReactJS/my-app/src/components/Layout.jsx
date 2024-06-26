@@ -28,7 +28,7 @@ const Layout = ()  => {
     });
 };
 
-const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     //e.preventDefault();
     try {
         const response = await axios.post('http://127.0.0.1:4401/api/jobPost', formData, {
@@ -50,9 +50,20 @@ const handleSubmit = async (e) => {
     } catch (error) {
         console.error('Error adding task:', error);
     }
-};
+  };
 
- 
+  const originUsername = localStorage.getItem('username');
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    if(originUsername) {
+      const parts = originUsername.split('@'); // Tách email thành mảng gồm phần trước và sau dấu @
+      if (parts.length > 0) {
+          setUsername(parts[0]); // Lấy phần tử đầu tiên là phần trước dấu @
+      }
+    }
+  }, [originUsername]);
+
   const navigate = useNavigate();
  
   const logout = () => {
@@ -76,8 +87,9 @@ const handleSubmit = async (e) => {
     return (
       <div className='container'>
         <div className="row">
-          <div className="col-md-10">
-            <h2 className='w-100 d-flex justify-content-center p-3 mb-4'>Lời nhắc</h2>
+          <div className="col-md-10 text-center mb-4 mt-3">
+            <h2 className='w-100 d-flex justify-content-center'>Lời nhắc</h2>
+            <small><i>Người dùng: @{username}</i></small>
           </div>
           <div className="col-md-2">
             <div className='mt-4'>

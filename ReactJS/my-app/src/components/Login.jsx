@@ -39,6 +39,7 @@ const Login = () => {
                     draggable: true,
                     progress: undefined,
                 });
+                localStorage.setItem('username', email);
                 navigate('/');
             } else {
                 console.log('Đăng nhập thất bại (no token found');

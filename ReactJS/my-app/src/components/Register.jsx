@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import bg from '../assets/not_transparent/0.PNG';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -53,6 +54,7 @@ const Register = () => {
                 <div className="row">
                     <div className="col-md-6">
                         {/* Chen hinh anh */}
+                        <img src={bg} alt="review-pokemon" />
                     </div>
                     <div className="col-md-6">
                         <h2 className='w-100 d-flex justify-content-center p-3 mt-3'>Đăng ký sử dụng</h2>
@@ -105,10 +107,33 @@ const Register = () => {
                                 required 
                             />
                         </div>
+                        <div className="form-floating mt-4 mb-4">
+                            <label htmlFor="assist_id">Chọn một trợ lý**: </label>
+                            <select
+                                name="assist_id"
+                                id="assist_id"
+                                className='form-control'
+                                value={formData.assist_id}
+                                onChange={handleChange}
+                            >
+                                <option className='text-secondary font-weight-bold' value="0">...</option>
+                                <option className='text-success font-weight-bold' value="1">+Venusaur*</option>
+                                <option className='text-warning font-weight-bold' value="2">+Pikachu*</option>
+                                <option className='text-danger font-weight-bold' value="3">+Charizard*</option>
+                                <option className='text-secondary font-weight-bold' value="4">+Umbreon*</option>
+                                <option className='text-primary font-weight-bold' value="5">+Lapras*</option>
+                                <option className='text-secondary font-weight-bold' value="0">Tôi không cần trợ lý</option>
+                            </select>
+                        </div>
                         <button className="btn btn-primary w-100 py-2" type="submit">Đăng ký</button>
                         <div className='mt-3'>
                             <p>Đã có tài khoản? <Link to="/login">Quay về đăng nhập</Link></p>
                         </div>
+                    </div>
+                    <div>
+                        <p className='p-0.25'>*: Dấu cộng đặt trước tên Pokémon, tức là sẽ có sự xuất hiện của tất cả dạng tiến hóa của Pokémon đó</p>
+                        <p className='p-0.25'>**: Trợ lý sẽ sử dụng hình ảnh của Pokémon*** mà bạn đã đăng ký cùng với tài khoản, để đồng hành và hỗ trợ bạn hoàn thành tất cả các lời nhắc đúng hạn.</p>
+                        <p className='p-0.25'>***: Pokémon is a Japanese media franchise consisting of video games, animated series and films, a trading card game, and other related media. <br />Tác giả sở hữu: <i> The Pokémon Company, GameFreak, Nintendo</i></p>
                     </div>
                 </div>
             </form>

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'display_name',
         'email',
         'password',
+        'assist_id', // chỉ sử dụng bảng model Assistant (ko dùng Character - đổi requirement)
     ];
 
     /**
