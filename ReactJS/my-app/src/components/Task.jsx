@@ -97,6 +97,7 @@ const Task = () => {
                     <th scope="col">Nội dung công việc</th>
                     <th scope="col">Thời hạn</th>
                     <th scope="col">Mức ưu tiên</th>
+                    <th scope="col">Trợ thủ</th>
                     <th scope="col">Cập nhật công việc</th>
                     <th scope="col">Hoàn thành công việc</th>
                 </tr>
@@ -117,6 +118,7 @@ const Task = () => {
                                 {jobs.priority_level === '1' && <p className='text-success'><BsEmojiSmile /> Thấp</p>}
                                 {jobs.priority_level === '2' && <p className='text-warning'><BsEmojiAstonished /> Trung bình</p>}
                                 {jobs.priority_level === '3' && <p className='text-danger'><BsEmojiAngry /> Cao</p>}
+                                <td><i>Check Assistant here</i></td>
                                 <td>
                                     <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
                                 </td>

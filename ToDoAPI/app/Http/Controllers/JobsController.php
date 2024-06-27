@@ -22,6 +22,7 @@ class JobsController extends Controller
         
         $getCharacterId = DB::table('jobs')->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')->where('jobs.user_id', $userId)->select('assistants.character_id')->get();
         $checkPokemonShiny = DB::table('jobs')->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')->where('jobs.user_id', $userId)->select('assistants.is_shiny')->get();
+        $getPokemonName = DB::table('jobs')->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')->join('characters', 'assistants.character_id', '=', 'characters.id')->where('jobs.user_id', $userId)->select('characters.character_name')->get();
 
         $processData = [];
         foreach($getJobsByUsrId as $getJobs) {
@@ -33,6 +34,7 @@ class JobsController extends Controller
         }
 
         return response([
+            'get_pokemon_name' => $getPokemonName,
             'get_character_id' => $getCharacterId,
             'check_pokemon_shiny' => $checkPokemonShiny,
             'result' => $getJobsByUsrId,
@@ -48,7 +50,9 @@ class JobsController extends Controller
         $updateModifiedDate = (string)Carbon::now()->toDateString();
         $jobIdInit = 'JOB'.str_replace('-','', $updateModifiedDate).$randNum.$userId;
 
-        $assistInput = $req->assist_id;
+        $assistInput = $req->assist_id123;
+        $assistInputReal = 'POKE'.(string)$assistInput;
+
         $assistId = 'ASSIST'.str_replace('-','', $updateModifiedDate).$randNum.$userId.'_'.$assistInput;
 
         $req->validate([
@@ -69,7 +73,7 @@ class JobsController extends Controller
         // XỬ LÝ TRONG MODEL ASSISTANTS
         $shinySpawn = rand(0,1);
 
-        $data2['character_id'] = $assistInput; // id value nhap tu front end
+        $data2['character_id'] = $assistInputReal; // id value nhap tu front end
         $data2['assist_id'] = $assistId;
         $data2['job_id'] = $jobIdInit;
         $data2['is_shiny'] = $shinySpawn; // randomize shiny

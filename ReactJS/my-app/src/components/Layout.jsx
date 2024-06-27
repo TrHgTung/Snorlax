@@ -24,10 +24,10 @@ const Layout = ()  => {
   });
 
   const handleChange = (e) => {
-    const inputElement = document.getElementById('assist_id123');
-    if(inputElement){
-      setSelectOption(inputElement.value);
-    }
+    // const inputElement = document.getElementById('assist_id123');
+    // if(inputElement){
+    //   setSelectOption(inputElement.value);
+    // }
     const { name, value } = e.target;
     setFormData({
         ...formData,
@@ -153,7 +153,7 @@ const Layout = ()  => {
                     <div className="mb-3 mt-3">
                         <label htmlFor='assist_id123' className="form-label">Chọn trợ thủ riêng cho lời nhắc:</label>
                         <select
-                          name="assist_id"
+                          name="assist_id123"
                           id="assist_id123"
                           className='form-control'
                           value={formData.assist_id}
