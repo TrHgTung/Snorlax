@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('job_id');
             $table->string('user_id');
+            $table->string('assist_id');
             $table->string('content');
             $table->string('priority_level');
             $table->string('deadline');

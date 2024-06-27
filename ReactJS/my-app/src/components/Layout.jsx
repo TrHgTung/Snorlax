@@ -10,6 +10,7 @@ import './css/hover.css';
 
 
 const Layout = ()  => {
+  const [selectOption, setSelectOption] = useState('0');
   const [auth, setAuth] = useState({
     token : localStorage.getItem('token') || null,
     isAuthenticated : localStorage.getItem('token') ? true : false
@@ -18,10 +19,15 @@ const Layout = ()  => {
   const [formData, setFormData] = useState({
     content: '',
     priority_level: '',
+    assist_id: '',
     deadline: ''
   });
 
   const handleChange = (e) => {
+    const inputElement = document.getElementById('assist_id123');
+    if(inputElement){
+      setSelectOption(inputElement.value);
+    }
     const { name, value } = e.target;
     setFormData({
         ...formData,
@@ -43,6 +49,7 @@ const Layout = ()  => {
             setFormData({
                 content: '',
                 priority_level: '',
+                assist_id: '',
                 deadline: ''
             });
         } else {
@@ -95,7 +102,7 @@ const Layout = ()  => {
         <div className="row">
           <div className="col-md-10 text-center mb-4 mt-3">
             <h2 className='w-100 d-flex justify-content-center'>Lời nhắc</h2>
-            <small><i>Người dùng: @{display_name} - Trợ lý:  
+            <small><i>Người dùng: @{display_name} - Trợ lý chính:  
                 {assist_id === '1' && ' Venusaur'}
                 {assist_id === '2' && ' Pikachu'}
                 {assist_id === '3' && ' Charizard'}
@@ -153,6 +160,27 @@ const Layout = ()  => {
                         </select>
                     </div>
                     <div className="mb-3 mt-3">
+                        <label htmlFor='assist_id123' className="form-label">Chọn trợ thủ riêng cho lời nhắc:</label>
+                        <select
+                          name="assist_id"
+                          id="assist_id123"
+                          className='form-control'
+                          value={formData.assist_id}
+                          onChange={handleChange}
+                        >
+                          <option className='text-primary font-weight-bold' value="1">Snorlax</option>
+                          <option className='text-warning font-weight-bold' value="2">Jolteon</option>
+                          <option className='text-primary font-weight-bold' value="3">Glaceon</option>
+                          <option className='text-success font-weight-bold' value="4">Leafeon</option>
+                          <option className='text-danger font-weight-bold' value="5">Flareon</option>
+                          <option className='text-success font-weight-bold' value="6">Meowscarada</option>
+                          <option className='text-danger font-weight-bold' value="7">Latias</option>
+                          <option className='text-warning font-weight-bold' value="8">Beedrill</option>
+                          <option className='text-success font-weight-bold' value="9">Larvitar</option>
+                          <option className='text-warning font-weight-bold' value="10">*Lucario*</option>
+                        </select>
+                    </div>
+                    <div className="mb-3 mt-3">
                         <label htmlFor='deadline' className="form-label">Thời hạn:</label>
                         {/* <input 
                           type="text"
@@ -177,7 +205,9 @@ const Layout = ()  => {
                     <button type="submit" className='btn btn-primary mb-3'>Thêm lời nhắc</button>
                 </form>
             </div>
-            <div className="col-md-8">         
+            <div className="col-md-8">  
+              {selectOption !== '0' && <img src={`/assets/add/${selectOption}.png`} className='img-need-hover' alt=''/>}       
+              {selectOption === '1' && <p><i>Hình ảnh về trợ thủ của bạn sẽ xuất hiện tại đây, sau khi bạn nhấn qua từng mục trong trường <strong>'Chọn trợ thủ riêng cho lời nhắc'</strong></i></p>}       
                 <Task/>
             </div>
         </div>

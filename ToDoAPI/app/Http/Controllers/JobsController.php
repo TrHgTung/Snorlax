@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Assistants;
 use Carbon\Carbon;
 
 class JobsController extends Controller
@@ -24,27 +25,46 @@ class JobsController extends Controller
     }
 
     public function AddJob(Request $req){
+
+        // XỬ LÝ TRONG MODEL JOBS
         $randNum = (string)rand(1111,9999);
         $userId = (string)auth()->user()->user_id;
         $updateModifiedDate = (string)Carbon::now()->toDateString();
         $jobIdInit = 'JOB'.str_replace('-','', $updateModifiedDate).$randNum.$userId;
 
+        $assistInput = $req->assist_id;
+        $assistId = 'ASSIST'.str_replace('-','', $updateModifiedDate).$randNum.$userId.'_'.$assistInput;
+
         $req->validate([
-            //'job_id' => 'required',
-            //'user_id' => 'required',
             'content' => 'required',
             'priority_level' => 'required',
             'deadline' => 'required',
-            //'last_modified' => 'required',
         ]);
 
         $data = $req->all();
         $data['job_id'] = $jobIdInit;
         $data['user_id'] = $userId;
+        $data['assist_id'] = $assistId;
         $data['last_modified'] = $updateModifiedDate;
         $data['status'] = '1';
+
+        Jobs::create($data);
+
+        // XỬ LÝ TRONG MODEL ASSISTANTS
+        $data2['character_id'] = $assistInput; // id value nhap tu front end
+        $data2['assist_id'] = $assistId;
+        $data2['job_id'] = $jobIdInit;
+
+        Assistants::create($data2);
             
-        return Jobs::create($data);
+        return response()->json(
+            [
+                'author' => 'Hoang Tung',
+                'message_response' => 'Thuc hien thanh cong',
+                'add_job' => $data,
+                'add_assistant' => $data2,
+            ]
+        );
     }
 
     public function JobDetails($id){ // for testing API
