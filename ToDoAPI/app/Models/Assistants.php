@@ -12,6 +12,7 @@ class Assistants extends Model
         'assist_id',
         'job_id',
         'character_id',
+        'is_shiny',
     ];
     public $timestamps = false;
    

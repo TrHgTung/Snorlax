@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Assistants;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class JobsController extends Controller
 {
@@ -18,9 +19,24 @@ class JobsController extends Controller
         $userId = auth()->user()->user_id;
 
         $getJobsByUsrId = Jobs::where('user_id', $userId)->where('status', '1')->get();
+        
+        $getCharacterId = DB::table('jobs')->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')->where('jobs.user_id', $userId)->select('assistants.character_id')->get();
+        $checkPokemonShiny = DB::table('jobs')->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')->where('jobs.user_id', $userId)->select('assistants.is_shiny')->get();
+
+        $processData = [];
+        foreach($getJobsByUsrId as $getJobs) {
+            $processData[] = [
+                'get_jobs' => $getJobs,
+                'get_character_id' => $getCharacterId,
+                'check_pokemon_shiny' => $checkPokemonShiny,
+            ];
+        }
 
         return response([
+            'get_character_id' => $getCharacterId,
+            'check_pokemon_shiny' => $checkPokemonShiny,
             'result' => $getJobsByUsrId,
+            // 'con_cu' => $processData,
         ], 200);
     }
 
@@ -51,9 +67,12 @@ class JobsController extends Controller
         Jobs::create($data);
 
         // XỬ LÝ TRONG MODEL ASSISTANTS
+        $shinySpawn = rand(0,1);
+
         $data2['character_id'] = $assistInput; // id value nhap tu front end
         $data2['assist_id'] = $assistId;
         $data2['job_id'] = $jobIdInit;
+        $data2['is_shiny'] = $shinySpawn; // randomize shiny
 
         Assistants::create($data2);
             

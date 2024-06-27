@@ -138,15 +138,6 @@ const Layout = ()  => {
                     </div>
                     <div className="mb-3 mt-3">
                         <label htmlFor='priority_level' className="form-label">Mức ưu tiên:</label>
-                        {/* <input 
-                          type="text"
-                          className="form-control"
-                          id="priority_level"
-                          name="priority_level"
-                          placeholder="Enter..."
-                          value={formData.priority_level}
-                          onChange={handleChange}
-                        /> */}
                         <select
                           name="priority_level"
                           id="priority_level"
@@ -168,29 +159,20 @@ const Layout = ()  => {
                           value={formData.assist_id}
                           onChange={handleChange}
                         >
-                          <option className='text-primary font-weight-bold' value="1">Snorlax</option>
-                          <option className='text-warning font-weight-bold' value="2">Jolteon</option>
-                          <option className='text-primary font-weight-bold' value="3">Glaceon</option>
-                          <option className='text-success font-weight-bold' value="4">Leafeon</option>
+                          <option className='text-primary font-weight-bold' value="2">Snorlax</option>
+                          <option className='text-success font-weight-bold' value="3">Leafeon</option>
+                          {/* <option className='text-primary font-weight-bold' value="10">Glaceon</option>
+                          <option className='text-warning font-weight-bold' value="4">Jolteon</option>
                           <option className='text-danger font-weight-bold' value="5">Flareon</option>
                           <option className='text-success font-weight-bold' value="6">Meowscarada</option>
                           <option className='text-danger font-weight-bold' value="7">Latias</option>
                           <option className='text-warning font-weight-bold' value="8">Beedrill</option>
-                          <option className='text-success font-weight-bold' value="9">Larvitar</option>
-                          <option className='text-warning font-weight-bold' value="10">*Lucario*</option>
+                          <option className='text-success font-weight-bold' value="9">Larvitar</option> */}
+                          <option className='text-warning font-weight-bold' value="4">*Lucario*</option>
                         </select>
                     </div>
                     <div className="mb-3 mt-3">
                         <label htmlFor='deadline' className="form-label">Thời hạn:</label>
-                        {/* <input 
-                          type="text"
-                          className="form-control"
-                          id="deadline"
-                          name="deadline"
-                          placeholder="Enter..."
-                          value={formData.deadline}
-                          onChange={handleChange}
-                        /> */}
                         <input 
                           type="datetime-local" 
                           id="deadline" 

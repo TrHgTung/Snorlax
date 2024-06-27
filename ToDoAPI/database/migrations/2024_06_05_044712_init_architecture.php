@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('assist_id');
             $table->string('job_id');
             $table->string('character_id');
+            $table->string('is_shiny');
         });
 
         Schema::create('characters', function (Blueprint $table) {
