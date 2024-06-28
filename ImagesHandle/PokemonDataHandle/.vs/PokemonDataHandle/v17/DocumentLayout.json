@@ -7,8 +7,24 @@
       "RelativeMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|solutionrelative:controllers\\pokemonscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|d:\\to-do-list-api\\imageshandle\\pokemondatahandle\\models\\pokemoncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|solutionrelative:models\\pokemoncontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|d:\\to-do-list-api\\imageshandle\\pokemondatahandle\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|d:\\to-do-list-api\\imageshandle\\pokemondatahandle\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|d:\\to-do-list-api\\imageshandle\\pokemondatahandle\\models\\pokemon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|solutionrelative:models\\pokemon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|d:\\to-do-list-api\\imageshandle\\pokemondatahandle\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|d:\\to-do-list-api\\imageshandle\\pokemondatahandle\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{20CE1ADF-70D1-486B-89FE-403C5F7EEF84}|PokemonDataHandle.csproj|solutionrelative:models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +34,22 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PokemonsController.cs",
+              "DocumentMoniker": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Controllers\\PokemonsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PokemonsController.cs",
+              "ToolTip": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Controllers\\PokemonsController.cs",
+              "RelativeToolTip": "Controllers\\PokemonsController.cs",
+              "ViewState": "AQIAAEwAAAAAAAAAAAAkwE4AAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-28T09:26:48.102Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -54,28 +84,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PokemonContext.cs",
-              "DocumentMoniker": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Models\\PokemonContext.cs",
-              "RelativeDocumentMoniker": "Models\\PokemonContext.cs",
-              "ToolTip": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Models\\PokemonContext.cs",
-              "RelativeToolTip": "Models\\PokemonContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 3,
+              "Title": "Pokemon.cs",
+              "DocumentMoniker": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Models\\Pokemon.cs",
+              "RelativeDocumentMoniker": "Models\\Pokemon.cs",
+              "ToolTip": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Models\\Pokemon.cs",
+              "RelativeToolTip": "Models\\Pokemon.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-28T10:32:04.754Z",
+              "WhenOpened": "2024-06-28T11:01:47.224Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PokemonsController.cs",
-              "DocumentMoniker": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Controllers\\PokemonsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\PokemonsController.cs",
-              "ToolTip": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Controllers\\PokemonsController.cs",
-              "RelativeToolTip": "Controllers\\PokemonsController.cs",
-              "ViewState": "AQIAAEwAAAAAAAAAAAAkwFgAAAAhAAAA",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-28T10:47:12.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABUAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-28T09:26:48.102Z",
+              "WhenOpened": "2024-06-28T10:44:41.913Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAABgAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-28T10:46:41.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LoginModel.cs",
+              "DocumentMoniker": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Models\\LoginModel.cs",
+              "RelativeDocumentMoniker": "Models\\LoginModel.cs",
+              "ToolTip": "D:\\to-do-list-API\\ImagesHandle\\PokemonDataHandle\\Models\\LoginModel.cs",
+              "RelativeToolTip": "Models\\LoginModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-28T10:43:07.613Z",
               "EditorCaption": ""
             }
           ]

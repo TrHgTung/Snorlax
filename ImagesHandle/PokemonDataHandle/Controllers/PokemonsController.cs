@@ -45,7 +45,7 @@ namespace PokemonDataHandle.Controllers
         // PUT: api/Pokemons/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> PutPokemon(int id, Pokemon pokemon)
         {
             if (id != pokemon.Id)
@@ -77,7 +77,7 @@ namespace PokemonDataHandle.Controllers
         // POST: api/Pokemons
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754 to use the DTO (Data Transfer Object)
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<ActionResult<Pokemon>> PostPokemon(Pokemon pokemon)
         {
             _context.Pokemons.Add(pokemon);
@@ -88,7 +88,7 @@ namespace PokemonDataHandle.Controllers
 
         // DELETE: api/Pokemons/5
         [HttpDelete("{id}")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> DeletePokemon(int id)
         {
             var pokemon = await _context.Pokemons.FindAsync(id);
