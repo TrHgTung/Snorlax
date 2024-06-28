@@ -10,7 +10,7 @@ import './css/hover.css';
 
 
 const Layout = ()  => {
-  const [selectOption, setSelectOption] = useState('0');
+  const [selectOption, setSelectOption] = useState('');
   const [auth, setAuth] = useState({
     token : localStorage.getItem('token') || null,
     isAuthenticated : localStorage.getItem('token') ? true : false
@@ -24,10 +24,10 @@ const Layout = ()  => {
   });
 
   const handleChange = (e) => {
-    // const inputElement = document.getElementById('assist_id');
-    // if(inputElement){
-    //   setSelectOption(inputElement.value);
-    // }
+    const inputElement = document.getElementById('assist_id');
+    if(inputElement){
+      setSelectOption(inputElement.value);
+    }
     const { name, value } = e.target;
     setFormData({
         ...formData,
@@ -40,6 +40,7 @@ const Layout = ()  => {
     try {
         const response = await axios.post('http://127.0.0.1:4401/api/jobPost', formData, {
             headers: {
+              // 'Content-Type': `application/x-www-form-urlencoded`,
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         });
@@ -145,9 +146,10 @@ const Layout = ()  => {
                           value={formData.priority_level}
                           onChange={handleChange}
                         >
-                          <option className='text-success font-weight-bold' value="1">Mặc định</option>
-                          <option className='text-warning font-weight-bold' value="2">Vừa phải</option>
-                          <option className='text-danger font-weight-bold' value="3">Cao</option>
+                          <option className='text-success font-weight-bold' value="">-- Chọn 1 mức độ --</option>
+                          <option className='text-success font-weight-bold' value="easy">Mặc định</option>
+                          <option className='text-warning font-weight-bold' value="middle">Vừa phải</option>
+                          <option className='text-danger font-weight-bold' value="difficult">Cao</option>
                         </select>
                     </div>
                     <div className="mb-3 mt-3">
@@ -159,6 +161,7 @@ const Layout = ()  => {
                           value={formData.assist_id}
                           onChange={handleChange}
                         >
+                          <option className='text-primary font-weight-bold' value="">-- Chọn 1 trợ thủ --</option>
                           <option className='text-primary font-weight-bold' value="2">Snorlax</option>
                           <option className='text-success font-weight-bold' value="3">Leafeon</option>
                           <option className='text-warning font-weight-bold' value="4">*Lucario*</option>
