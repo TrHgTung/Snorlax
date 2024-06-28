@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import Task from './Task';
+import host from '../config/host.json';
 import { Navigate, useNavigate  } from 'react-router-dom';
 // import Logout from './Logout';
 import { useAuth } from '../supports/AuthProvider';
@@ -8,6 +9,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import './css/hover.css';
 
+const {SERVER_API} = host;
+const {API_ENDPOINT} = host;
 
 const Layout = ()  => {
   const [selectOption, setSelectOption] = useState('');
@@ -38,7 +41,7 @@ const Layout = ()  => {
   const handleSubmit = async (e) => {
     //e.preventDefault();
     try {
-        const response = await axios.post('http://127.0.0.1:4401/api/jobPost', formData, {
+        const response = await axios.post(`${SERVER_API}${API_ENDPOINT}/jobPost`, formData, {
             headers: {
               // 'Content-Type': `application/x-www-form-urlencoded`,
                 Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -86,7 +89,7 @@ const Layout = ()  => {
         token: null,
         isAuthenticated: false 
     });
-    toast.success('Đã đăng xuất. Hãy đăng nhập lại', {
+    toast.warning('Đã đăng xuất. Hãy đăng nhập lại', {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,

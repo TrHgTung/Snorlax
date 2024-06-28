@@ -2,6 +2,10 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import host from '../config/host.json';
+
+const {SERVER_API} = host;
+const {API_ENDPOINT} = host;
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -31,7 +35,7 @@ const Register = () => {
 
         try{
             //await axios.get('http://127.0.0.1:4401/sanctum/csrf-cookie', { withCredentials: true });
-            const response = await axios.post('http://127.0.0.1:4401/api/register', {
+            const response = await axios.post(`${SERVER_API}${API_ENDPOINT}/register`, {
                 display_name: formData.display_name,
                 email: formData.email,
                 password: formData.password,

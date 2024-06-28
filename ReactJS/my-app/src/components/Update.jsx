@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom';
+import host from '../config/host.json';
+
+const {SERVER_API} = host;
+const {API_ENDPOINT} = host;
 
 const Update = () => {
     const { id } = useParams(); // Lấy jobId từ URL
@@ -14,7 +18,7 @@ const Update = () => {
     useEffect(() => {
         const fetchData = async () => {
             try{
-                const response = await axios.get(`http://127.0.0.1:4401/api/job/${id}`, {
+                const response = await axios.get(`${SERVER_API}${API_ENDPOINT}/job/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -42,7 +46,7 @@ const Update = () => {
     const handleSubmit = async (e) => {
         //e.preventDefault();
         try{
-            const response = await axios.put(`http://127.0.0.1:4401/api/edit/job/${id}`, formData, {
+            const response = await axios.put(`${SERVER_API}${API_ENDPOINT}/edit/job/${id}`, formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

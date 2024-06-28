@@ -4,7 +4,10 @@ import { Link, useNavigate  } from 'react-router-dom';
 import { useAuth } from '../supports/AuthProvider';
 import bg from './inline-img/bg/0.PNG';
 import { toast } from 'react-toastify';
+import host from '../config/host.json';
 
+const {SERVER_API} = host;
+const {API_ENDPOINT} = host;
 axios.defaults.withCredentials = true;
 
 const Login = () => {
@@ -18,8 +21,8 @@ const Login = () => {
     const handleLogin  = async (e) => {
         e.preventDefault();
         try{
-            await axios.get('http://127.0.0.1:4401/sanctum/csrf-cookie', { withCredentials: true });
-            const response = await axios.post('http://127.0.0.1:4401/api/login', {
+            await axios.get(`${SERVER_API}/sanctum/csrf-cookie`, { withCredentials: true });
+            const response = await axios.post(`${SERVER_API}${API_ENDPOINT}/login`, {
                 email,
                 password,
             }, { withCredentials: true });

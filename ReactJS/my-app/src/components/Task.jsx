@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../supports/AuthProvider';
 import { BsEmojiSmile, BsEmojiAstonished, BsEmojiAngry } from "react-icons/bs";
+import host from '../config/host.json';
+
+const {SERVER_API} = host;
+const {API_ENDPOINT} = host;
 
 const Task = () => {
     // useEffect(() => {
@@ -28,7 +32,7 @@ const Task = () => {
         const validToken = localStorage.getItem("token");
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:4401/api/jobs', {
+                const response = await axios.get(`${SERVER_API}${API_ENDPOINT}/jobs`, {
                     headers: {
                         Authorization: `Bearer ${auth.token}`
                     }
@@ -62,8 +66,8 @@ const Task = () => {
   
     const handleHoanThanhTask = async (jobId) => {
         try {
-            await axios.get('http://127.0.0.1:4401/sanctum/csrf-cookie', { withCredentials: true });
-            const response = await axios.patch(`http://127.0.0.1:4401/api/finish/job/${jobId}`, 
+            await axios.get(`${SERVER_API}/sanctum/csrf-cookie`, { withCredentials: true });
+            const response = await axios.patch(`${SERVER_API}${API_ENDPOINT}/finish/job/${jobId}`, 
                 // status: '0' // Cap nhat thanh '0' (hoan thanhf Task)
                 null, {
                 headers: {
