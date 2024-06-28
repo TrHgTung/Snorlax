@@ -17,7 +17,7 @@ const Task = () => {
     //         console.log('Cannot authenticate due to an error');
     //     }
     const [data, setData] = useState('');
-    // const [pokemonName, setPokemonName] = useState('');
+    const [pokemonTaskName, setPokemonTaskName] = useState('');
     const { auth } = useAuth();
     const navigate = useNavigate();
     let stt = 1;
@@ -33,17 +33,26 @@ const Task = () => {
                         Authorization: `Bearer ${auth.token}`
                     }
                 });
+                // const responseData = response.data.get_pokemon_name;
+                // const formattedData = {};
+                // const index = 1;
+                // responseData.forEach((item, index) => {
+                //     formattedData[index + 1] = item.character_name; // Giả sử id bắt đầu từ 1
+                // });
+
                 setData(response.data.result);
-                // setPokemonName(response.data.pokemon_name);                
+                // setData(response.data.con_cu.get_jobs);
+                setPokemonTaskName(response.data.get_pokemon_name);
+                // setPokemonTaskName(formattedData);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
 
         fetchData();
-    }, [auth.token]);     
+    }, [auth.token]);    
     
-    if (!data) {
+    if (!data || !pokemonTaskName) {
         return <div>Đang tải dữ liệu...</div>;
     }
 
@@ -103,32 +112,34 @@ const Task = () => {
                 </tr>
             </thead>
             <tbody>
-                {data.length === 0 ? (
+                {(data.length === 0) ? (
                     <tr>
                         <td colSpan="6" className="text-center">Không có lời nhắc khả dụng</td>
                     </tr>
                 ) : (
-                        data.map(jobs => (
-                        jobs.status === '1' && (
-                            <tr key={jobs.id}>
-                                <td>{stt++}</td>
-                                <td>{jobs.content}</td>
-                                <td>{jobs.deadline}</td>
-                                {/* <td>{jobs.priority_level}</td> */}
-                                {jobs.priority_level === '1' && <p className='text-success'><BsEmojiSmile /> Thấp</p>}
-                                {jobs.priority_level === '2' && <p className='text-warning'><BsEmojiAstonished /> Trung bình</p>}
-                                {jobs.priority_level === '3' && <p className='text-danger'><BsEmojiAngry /> Cao</p>}
-                                <td><i>Check Assistant here</i></td>
-                                <td>
-                                    <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
-                                </td>
-                                <td>
-                                    <button onClick={ () => handleHoanThanhTask(jobs.id) } className='btn btn-sm btn-success ms-2'>Đánh dấu h.tất</button>
-                                </td>
-                            </tr>
+                    // pokemonTaskName.map(pokemons => (
+                        data.map((jobs, index) => (
+                            jobs.status === '1' && (
+                                <tr key={jobs.id}>
+                                    <td>{stt++}</td>
+                                    <td>{jobs.content}</td>
+                                    <td>{jobs.deadline}</td>
+                                    {jobs.priority_level === '1' && <p className='text-success'><BsEmojiSmile /> Thấp</p>}
+                                    {jobs.priority_level === '2' && <p className='text-warning'><BsEmojiAstonished /> Trung bình</p>}
+                                    {jobs.priority_level === '3' && <p className='text-danger'><BsEmojiAngry /> Cao</p>}
+                                    {/* <td>{pokemons.character_name}</td> */}
+                                    <td>{pokemonTaskName[index] ? pokemonTaskName[index].character_name : 'Lời nhắc này không có trợ thủ!'}</td>
+                                    <td>
+                                        <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
+                                    </td>
+                                    <td>
+                                        <button onClick={ () => handleHoanThanhTask(jobs.id) } className='btn btn-sm btn-success ms-2'>Đánh dấu h.tất</button>
+                                    </td>
+                                </tr>
+                                // ))
+                            )
                         )
-                    )
-                ))}
+                    ))}
             </tbody>
         </table>
         <div>

@@ -20,18 +20,36 @@ class JobsController extends Controller
 
         $getJobsByUsrId = Jobs::where('user_id', $userId)->where('status', '1')->get();
         
-        $getCharacterId = DB::table('jobs')->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')->where('jobs.user_id', $userId)->select('assistants.character_id')->get();
-        $checkPokemonShiny = DB::table('jobs')->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')->where('jobs.user_id', $userId)->select('assistants.is_shiny')->get();
-        $getPokemonName = DB::table('jobs')->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')->join('characters', 'assistants.character_id', '=', 'characters.id')->where('jobs.user_id', $userId)->select('characters.character_name')->get();
+        $getCharacterId = DB::table('jobs')
+                            ->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')
+                            ->where('jobs.user_id', $userId)
+                            ->where('jobs.status', '1')
+                            ->select('assistants.character_id')
+                            ->get();
 
-        $processData = [];
-        foreach($getJobsByUsrId as $getJobs) {
-            $processData[] = [
-                'get_jobs' => $getJobs,
-                'get_character_id' => $getCharacterId,
-                'check_pokemon_shiny' => $checkPokemonShiny,
-            ];
-        }
+        $checkPokemonShiny = DB::table('jobs')
+                            ->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')
+                            ->where('jobs.user_id', $userId)
+                            ->where('jobs.status', '1')
+                            ->select('assistants.is_shiny')
+                            ->get();
+
+        $getPokemonName = DB::table('jobs')
+                            ->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')
+                            ->join('characters', 'assistants.character_id', '=', 'characters.character_id')
+                            ->where('jobs.user_id', $userId)
+                            ->where('jobs.status', '1')
+                            ->select('characters.character_name')
+                            ->get();
+
+        // $processData = [];
+        // foreach($getJobsByUsrId as $getJobs) {
+        //     $processData[] = [
+        //         'get_jobs' => $getJobs,
+        //         'get_character_id' => $getCharacterId,
+        //         'check_pokemon_shiny' => $checkPokemonShiny,
+        //     ];
+        // }
 
         return response([
             'get_pokemon_name' => $getPokemonName,
@@ -50,7 +68,7 @@ class JobsController extends Controller
         $updateModifiedDate = (string)Carbon::now()->toDateString();
         $jobIdInit = 'JOB'.str_replace('-','', $updateModifiedDate).$randNum.$userId;
 
-        $assistInput = $req->assist_id123;
+        $assistInput = $req->assist_id;
         $assistInputReal = 'POKE'.(string)$assistInput;
 
         $assistId = 'ASSIST'.str_replace('-','', $updateModifiedDate).$randNum.$userId.'_'.$assistInput;

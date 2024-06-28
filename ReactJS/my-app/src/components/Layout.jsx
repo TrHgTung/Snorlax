@@ -24,7 +24,7 @@ const Layout = ()  => {
   });
 
   const handleChange = (e) => {
-    // const inputElement = document.getElementById('assist_id123');
+    // const inputElement = document.getElementById('assist_id');
     // if(inputElement){
     //   setSelectOption(inputElement.value);
     // }
@@ -61,7 +61,7 @@ const Layout = ()  => {
   };
 
   const display_name = localStorage.getItem('display_name');
-  const assist_id = localStorage.getItem('assist_id');
+  const assist_id_main = localStorage.getItem('assist_id');
   // const [username, setUsername] = useState('');
 
   // useEffect(() => {
@@ -103,16 +103,16 @@ const Layout = ()  => {
           <div className="col-md-10 text-center mb-4 mt-3">
             <h2 className='w-100 d-flex justify-content-center'>Lời nhắc</h2>
             <small><i>Người dùng: @{display_name} - Trợ lý chính:  
-                {assist_id === '1' && ' Venusaur'}
-                {assist_id === '2' && ' Pikachu'}
-                {assist_id === '3' && ' Charizard'}
-                {assist_id === '4' && ' Umbreon'}
-                {assist_id === '5' && ' Lapras'}
-                {(assist_id !== '1' 
-                && assist_id !== '2' 
-                && assist_id !== '3'  
-                && assist_id !== '4'  
-                && assist_id !== '5') && ' Không có'}
+                {assist_id_main === '1' && ' Venusaur'}
+                {assist_id_main === '2' && ' Pikachu'}
+                {assist_id_main === '3' && ' Charizard'}
+                {assist_id_main === '4' && ' Umbreon'}
+                {assist_id_main === '5' && ' Lapras'}
+                {(assist_id_main !== '1' 
+                && assist_id_main !== '2' 
+                && assist_id_main !== '3'  
+                && assist_id_main !== '4'  
+                && assist_id_main !== '5') && ' Không có'}
             </i></small>
           </div>
           <div className="col-md-2">
@@ -151,23 +151,16 @@ const Layout = ()  => {
                         </select>
                     </div>
                     <div className="mb-3 mt-3">
-                        <label htmlFor='assist_id123' className="form-label">Chọn trợ thủ riêng cho lời nhắc:</label>
+                        <label htmlFor='assist_id' className="form-label">Chọn trợ thủ riêng cho lời nhắc:</label>
                         <select
-                          name="assist_id123"
-                          id="assist_id123"
+                          name="assist_id"
+                          id="assist_id"
                           className='form-control'
                           value={formData.assist_id}
                           onChange={handleChange}
                         >
                           <option className='text-primary font-weight-bold' value="2">Snorlax</option>
                           <option className='text-success font-weight-bold' value="3">Leafeon</option>
-                          {/* <option className='text-primary font-weight-bold' value="10">Glaceon</option>
-                          <option className='text-warning font-weight-bold' value="4">Jolteon</option>
-                          <option className='text-danger font-weight-bold' value="5">Flareon</option>
-                          <option className='text-success font-weight-bold' value="6">Meowscarada</option>
-                          <option className='text-danger font-weight-bold' value="7">Latias</option>
-                          <option className='text-warning font-weight-bold' value="8">Beedrill</option>
-                          <option className='text-success font-weight-bold' value="9">Larvitar</option> */}
                           <option className='text-warning font-weight-bold' value="4">*Lucario*</option>
                         </select>
                     </div>
