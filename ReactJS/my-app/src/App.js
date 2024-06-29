@@ -10,6 +10,7 @@ import { render } from '@testing-library/react';
 import Update from './components/Update';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Assistant from './components/Assistant';
 
 function App() {
   return (
@@ -23,6 +24,14 @@ function App() {
                         element={
                             <PrivateRoute>
                                 <Layout />
+                            </PrivateRoute>
+                        } 
+                    />
+                    <Route 
+                        path="/assistant-zone/:id" 
+                        element={
+                            <PrivateRoute>
+                                <Assistant />
                             </PrivateRoute>
                         } 
                     />

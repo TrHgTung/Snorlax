@@ -9,17 +9,6 @@ const {SERVER_API} = host;
 const {API_ENDPOINT} = host;
 
 const Task = () => {
-    // useEffect(() => {
-    //     fetchData();
-    // }, [])
-
-    // const fetchData = async () => {
-    //     try{
-    //         const result = await axios("http://127.0.0.1:4401/api/jobs");
-    //         console.log(result);
-    //     }catch (error) {
-    //         console.log('Cannot authenticate due to an error');
-    //     }
     const [data, setData] = useState('');
     const [pokemonTaskName, setPokemonTaskName] = useState('');
     const { auth } = useAuth();
@@ -29,7 +18,7 @@ const Task = () => {
     const assistId = localStorage.getItem('assist_id');
 
     useEffect(() => {
-        const validToken = localStorage.getItem("token");
+        // const validToken = localStorage.getItem("token");
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${SERVER_API}${API_ENDPOINT}/jobs`, {
@@ -37,17 +26,9 @@ const Task = () => {
                         Authorization: `Bearer ${auth.token}`
                     }
                 });
-                // const responseData = response.data.get_pokemon_name;
-                // const formattedData = {};
-                // const index = 1;
-                // responseData.forEach((item, index) => {
-                //     formattedData[index + 1] = item.character_name; // Giả sử id bắt đầu từ 1
-                // });
-
+                
                 setData(response.data.result);
-                // setData(response.data.con_cu.get_jobs);
                 setPokemonTaskName(response.data.get_pokemon_name);
-                // setPokemonTaskName(formattedData);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -62,6 +43,10 @@ const Task = () => {
 
     const handleUpdateClick = (jobId) => {
         navigate(`/update/${jobId}`);
+    };
+
+    const directToAssistant = (jobId) => {
+        navigate(`/assistant-zone/${jobId}`);
     };
   
     const handleHoanThanhTask = async (jobId) => {
@@ -118,7 +103,7 @@ const Task = () => {
             <tbody>
                 {(data.length === 0) ? (
                     <tr>
-                        <td colSpan="6" className="text-center">Không có lời nhắc khả dụng</td>
+                        <td colSpan="7" className="text-center">Không có lời nhắc khả dụng</td>
                     </tr>
                 ) : (
                     // pokemonTaskName.map(pokemons => (
@@ -131,7 +116,7 @@ const Task = () => {
                                     {jobs.priority_level === 'easy' && <p className='text-success'><BsEmojiSmile /> Thấp</p>}
                                     {jobs.priority_level === 'middle' && <p className='text-warning'><BsEmojiAstonished /> Trung bình</p>}
                                     {jobs.priority_level === 'difficult' && <p className='text-danger'><BsEmojiAngry /> Cao</p>}
-                                    <td>{pokemonTaskName[index] ? pokemonTaskName[index].character_name : 'Lời nhắc này không có trợ thủ!'}</td>
+                                    <td>{pokemonTaskName[index] ? (<a onClick={ () => directToAssistant(jobs.id) }>{pokemonTaskName[index].character_name}</a> ) : (<p>Lời nhắc này không có trợ thủ!</p>)}</td>
                                     <td>
                                         <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
                                     </td>

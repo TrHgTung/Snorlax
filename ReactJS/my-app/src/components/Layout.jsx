@@ -39,7 +39,7 @@ const Layout = ()  => {
 };
 
   const handleSubmit = async (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     try {
         const response = await axios.post(`${SERVER_API}${API_ENDPOINT}/jobPost`, formData, {
             headers: {
@@ -57,6 +57,22 @@ const Layout = ()  => {
                 deadline: ''
             });
         } else {
+            setFormData({
+              content: '',
+              priority_level: '',
+              assist_id: '',
+              deadline: ''
+            });
+            
+            toast.success('Đã thêm thành công. Hãy tải lại trang', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
             console.error('Failed to add task:', response.data.message);
         }
     } catch (error) {

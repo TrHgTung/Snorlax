@@ -112,14 +112,49 @@ class JobsController extends Controller
         $userId = auth()->user()->user_id;
         $getData = Jobs::find($id);
 
+        $getCharacterId = DB::table('jobs')
+                            ->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')
+                            ->where('jobs.user_id', $userId)
+                            ->where('jobs.id', $id)
+                            ->where('jobs.status', '1')
+                            ->select('assistants.character_id')
+                            ->get();
+
+        $checkPokemonShiny = DB::table('jobs')
+                            ->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')
+                            ->where('jobs.id', $id)
+                            ->where('jobs.user_id', $userId)
+                            ->where('jobs.status', '1')
+                            ->select('assistants.is_shiny')
+                            ->get();
+
+        $getPokemonName = DB::table('jobs')
+                            ->join('assistants', 'jobs.job_id', '=', 'assistants.job_id')
+                            ->join('characters', 'assistants.character_id', '=', 'characters.character_id')
+                            ->where('jobs.id', $id)
+                            ->where('jobs.user_id', $userId)
+                            ->where('jobs.status', '1')
+                            ->select('characters.character_name')
+                            ->get();
+
+        // foreach($getPokemonName as $pokemon){
+        //     if($pokemon->character_name === $id){
+        //         $matchedPokemon = $pokemon->character_name;
+        //         break;
+        //     }
+        // }
+
         if($userId == $getData->user_id){
             return response([
+                'get_pokemon_name' => $getPokemonName,
+                'get_character_id' => $getCharacterId,
+                'check_pokemon_shiny' => $checkPokemonShiny,
                 'result' => $getData,
             ], 200);
         }
         else{
             return response([
-                'message' => 'Ban khong the truy cap noi dung nay (Unauthorized)',
+                'message' => 'Da co loi xay ra',
             ], 401);
         }
         
