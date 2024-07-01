@@ -3,7 +3,7 @@
 
 <h6>Phiên bản: 1.0</h6>
 <p>Một ứng dụng API-CSR nhằm lưu lại các lời nhắc cho nhiều người dùng </p>
-<img src="GioiThieu.jpg">
+<img src="GIoiThieu.jpg">
 
     - Chủ thể: Người dùng
     - Kiến trúc phần mềm: Layered Architecture - Client-Side Rendering
