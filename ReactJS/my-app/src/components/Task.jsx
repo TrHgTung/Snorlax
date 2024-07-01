@@ -11,6 +11,7 @@ const {API_ENDPOINT} = host;
 const Task = () => {
     const [data, setData] = useState('');
     const [pokemonTaskName, setPokemonTaskName] = useState('');
+    const [deadline, setDeadline] = useState('');
     const { auth } = useAuth();
     const navigate = useNavigate();
     let stt = 1;
@@ -27,6 +28,7 @@ const Task = () => {
                     }
                 });
                 
+                setDeadline(response.data.result);
                 setData(response.data.result);
                 setPokemonTaskName(response.data.get_pokemon_name);
             } catch (error) {
@@ -85,8 +87,66 @@ const Task = () => {
         }
     };
 
+    // const originDateTimeString = deadline.deadline;
+    // const formatDateTime = (originDateTimeString) => {
+    //     const date = new Date(originDateTimeString);
+    //     const day = String(date.getDate()).padStart(2, '0');
+    //     const month = String(date.getMonth() + 1).padStart(2, '0');
+    //     const year = date.getFullYear();
+    //     const hours = String(date.getHours()).padStart(2, '0');
+    //     const minutes = String(date.getMinutes()).padStart(2, '0');
+      
+    //     return `Ngày ${day}-${month}-${year} - Lúc ${hours}:${minutes}*`;
+    // };
+    // const formattedDateTime = formatDateTime(originDateTimeString);
+    let dl = [];
+    for(let i = 0; i < deadline.length; i++){
+        dl.push(deadline[i].deadline);
+    }
+    console.log(dl);
+
+    let dates = [];
+    
+    dl.forEach(datetime => {
+        let date = datetime.substring(0, 10);
+        dates.push(date);
+    });
+    
+    console.log('Dinh dang xu ly: ' + dates);// ***
+
+    let now = new Date();
+
+    let year = now.getFullYear();
+    let month = (now.getMonth() + 1).toString().padStart(2, '0'); // Thêm '0' phía trước nếu cần thiết
+    let day = now.getDate().toString().padStart(2, '0'); // Thêm '0' phía trước nếu cần thiết
+
+    let formatDate = `${year}-${month}-${day}`;
+
+    console.log(`Ngày tháng năm hiện tại: ${formatDate}`); 
+
+    // let result_date = [];
+    let dateOnDeadline = '';
+    for(let i = 0; i < dates.length; i++){
+        if(dates[i] == formatDate){
+            dateOnDeadline = dates[i];
+        }
+    }
+    if(dateOnDeadline){
+        console.log(dateOnDeadline);
+    }
+    else {
+        console.log('Hông có lời nhắc nào đến hạn');
+    }
+
     return (
       <div className='container'>
+        <div>
+            {(dateOnDeadline) ? (
+                <div className='text-danger mb-4 mt-1'>CẢNH BÁO: Có lời nhắc sắp đến hạn hôm nay, hãy kiểm tra lại</div>
+            ) : (
+                <div className='mb-4 mt-1'><i>Hãy click vào từng trợ thủ để xem chúng nhắc bạn điều gì</i></div>
+            )}
+        </div>
         <h4>Danh sách lời nhắc cần hoàn thành</h4>
         <table className="table table-striped">
             <thead>
@@ -116,7 +176,7 @@ const Task = () => {
                                     {jobs.priority_level === 'easy' && <p className='text-success'><BsEmojiSmile /> Thấp</p>}
                                     {jobs.priority_level === 'middle' && <p className='text-warning'><BsEmojiAstonished /> Trung bình</p>}
                                     {jobs.priority_level === 'difficult' && <p className='text-danger'><BsEmojiAngry /> Cao</p>}
-                                    <td>{pokemonTaskName[index] ? (<a onClick={ () => directToAssistant(jobs.id) }>{pokemonTaskName[index].character_name}</a> ) : (<p>Lời nhắc này không có trợ thủ!</p>)}</td>
+                                    <td>{pokemonTaskName[index] ? (<a className='force-link link-offset-2 link-underline link-underline-opacity-0' onClick={ () => directToAssistant(jobs.id) }>{pokemonTaskName[index].character_name}</a> ) : (<p>Lời nhắc này không có trợ thủ!</p>)}</td>
                                     <td>
                                         <button onClick={ () => handleUpdateClick(jobs.id) } className='btn btn-sm btn-secondary'>Chỉnh sửa</button>
                                     </td>
