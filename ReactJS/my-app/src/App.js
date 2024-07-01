@@ -11,6 +11,7 @@ import Update from './components/Update';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Assistant from './components/Assistant';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -32,6 +33,14 @@ function App() {
                         element={
                             <PrivateRoute>
                                 <Assistant />
+                            </PrivateRoute>
+                        } 
+                    />
+                    <Route 
+                        path="/profile" 
+                        element={
+                            <PrivateRoute>
+                                <Profile />
                             </PrivateRoute>
                         } 
                     />

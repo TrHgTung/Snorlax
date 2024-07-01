@@ -14,6 +14,8 @@ const Update = () => {
         priority_level: '',
         deadline: ''
     });
+    const [pokemonName, setPokemonName] = useState('');
+    const [isShiny, setIsShiny] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,7 +26,8 @@ const Update = () => {
                     }
                 });
                 setFormData(response.data.result);
-                
+                setPokemonName(response.data.get_pokemon_name); 
+                setIsShiny(response.data.check_pokemon_shiny);          
                 // console.log(getName)
             }
             catch(error){
@@ -134,6 +137,33 @@ const Update = () => {
                     </div>
                     <button type="submit" className="btn btn-primary mb-3">Cập nhật</button>
                 </form>
+            </div>
+            <div className="col-md-2"></div>
+            <div className="col-md-6">
+                {(pokemonName.length === 0) ? 
+                (
+                    <div className='p-5'>
+                        <tr>
+                            <p>Đang cố gắng tải hình ảnh trợ thủ của bạn...</p>
+                        </tr>
+                    </div>
+                    
+                ) :
+                (
+                    pokemonName.map((jobs, index) => (
+                        <>
+                        <div className='mt-2'>
+                            <p><strong>Trợ thủ: </strong>{pokemonName[index].character_name}</p>
+                        </div>
+                            <div className='mt-2 mb-5'>
+                                <img className='img-need-hover' src={`/assets/assistant_zone/${pokemonName[index].character_name}_${isShiny[index].is_shiny}.png`} width="360px" height="360px" alt={`${pokemonName[index].character_name}`} />
+                            </div>
+                            <div className='mt-5'>
+                                <p><strong>{pokemonName[index].character_name}:</strong> Hello</p>
+                            </div>
+                        </>
+                    )
+                ))}
             </div>
         </div>
     </div>

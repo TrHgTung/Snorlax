@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import host from '../config/host.json';
+import quote from '../config/quote.json';
 import { toast } from 'react-toastify';
 import { useAuth } from '../supports/AuthProvider';
 import axios from 'axios';
@@ -163,9 +164,9 @@ function Assistant() {
         e.target.innerHTML = newText;
       };
 
-      const sendTinhNangNayToiKhongLamDuoc = () => {
-        window.alert('Tính năng này đang được phát triển..');
-      }
+    const randQuote = quote;
+    var itemRand = randQuote[Math.floor(Math.random()*randQuote.length)];
+
   return (
     <>
         <div className='container'>
@@ -240,8 +241,7 @@ function Assistant() {
                                 </p>
                             </div>
                             <div className='mt-3 small'>
-                                <small>Bạn có muốn nhận thông báo qua e-mail khi gần đến thời hạn của lời nhắc? </small>
-                                <a href="#" onClick={sendTinhNangNayToiKhongLamDuoc}>Nhận e-mail nhắc khi đến hạn</a>
+                                <p><strong>Fact:</strong> {itemRand} </p>
                             </div>
                         </>                                   
                     )}

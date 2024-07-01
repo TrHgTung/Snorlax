@@ -1,0 +1,27 @@
+
+.parallax {
+    background-image: url('../../../public/assets/grass.png'); /* Thay đổi URL ảnh tại đây */
+    height: 100vh; /* Chiều cao của viewport */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+p {
+    font-size: 1.5em;
+}

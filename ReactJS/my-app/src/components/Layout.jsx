@@ -122,7 +122,7 @@ const Layout = ()  => {
         <div className="row">
           <div className="col-md-10 text-center mb-4 mt-3">
             <h2 className='w-100 d-flex justify-content-center'>Lời nhắc</h2>
-            <small><i>Người dùng: @{display_name} - Trợ lý chính:  
+            <small><i>Người dùng: <a href='/profile'>@{display_name}</a> - Trợ lý chính:  
                 {assist_id_main === '1' && ' Venusaur'}
                 {assist_id_main === '2' && ' Pikachu'}
                 {assist_id_main === '3' && ' Charizard'}
@@ -183,7 +183,7 @@ const Layout = ()  => {
                           <option className='text-primary font-weight-bold' value="">-- Chọn 1 trợ thủ --</option>
                           <option className='text-primary font-weight-bold' value="2">Snorlax</option>
                           <option className='text-success font-weight-bold' value="3">Leafeon</option>
-                          <option className='text-warning font-weight-bold' value="4">*Lucario*</option>
+                          <option className='text-warning font-weight-bold' value="4">Lucario</option>
                         </select>
                     </div>
                     <div className="mb-3 mt-3">
