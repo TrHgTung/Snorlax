@@ -50,12 +50,25 @@ function Assistant() {
             (
                 pokemonName.map((jobs, index) => (
                     // <p>{pokemonName[index].character_name}</p>
-                    <img src={`/assets/assistant_zone/${pokemonName[index].character_name}_${pokemonName[index].is_shiny}.png`} alt={`${pokemonName[index].character_name}`} />
+                    <>
+                        <div className='mt-2 mb-3'>
+                            <img src={`/assets/assistant_zone/${pokemonName[index].character_name}_${isShiny[index].is_shiny}.png`} width="360px" height="360px" alt={`${pokemonName[index].character_name}`} />
+                        </div>
+                        <div className='mt-4 mb-3'>
+                            {(isShiny.map((jobs, index) => (
+                                jobs.is_shiny === '1' ? (
+                                    <p>Hello, I am your Shiny {pokemonName[index].character_name}</p>
+                                ) : (
+                                    <p>Hello, I am your {pokemonName[index].character_name}</p>
+                                )
+                            )))}
+                        </div>
+                    </>
                 )
             ))}
         </div>
 
-        <div className='mt-3 p-2'>
+        {/* <div className='mt-3 p-2'>
             {(isShiny.length === 0) ? 
             (
                 <tr>
@@ -73,7 +86,7 @@ function Assistant() {
                     
                 )
             ))}
-        </div>
+        </div> */}
     </>
   )
 }
