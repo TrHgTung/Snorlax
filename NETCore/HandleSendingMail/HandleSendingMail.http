@@ -1,6 +1,0 @@
-@HandleSendingMail_HostAddress = http://localhost:5145
-
-GET {{HandleSendingMail_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

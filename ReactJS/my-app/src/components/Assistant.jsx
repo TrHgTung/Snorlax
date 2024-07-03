@@ -164,35 +164,6 @@ function Assistant() {
         e.target.innerHTML = newText;
       };
 
-      const handleSendMail = async (e) => {
-        e.preventDefault();
-
-        useEffect(() => {
-            const username = localStorage.getItem('username');
-            const pokemon_name = localStorage.getItem('pokemon_name');
-            const deadline = localStorage.getItem('deadline');
-            if (username && pokemon_name && deadline) {
-                // Gửi POST request bằng Axios
-                const postData = {
-                    email: username,
-                    assistant: pokemon_name,
-                    deadline: deadline
-                };
-
-                axios.post('https://example.com/api/data', postData)
-                    .then(response => {
-                        console.log('Dang xu ly gui tin hieu ve phia gui mail');
-                    })
-                    .catch(error => {
-                        console.error('Da co loi xay ra');
-                    });
-                } else {
-                    console.log('Khong co du lieu can thiet');
-                }
-            }, []);
-        };
-
-
     const randQuote = quote;
     var itemRand = randQuote[Math.floor(Math.random()*randQuote.length)];
 
@@ -288,7 +259,7 @@ function Assistant() {
         
         <div className='mt-3 p-5'>
             <small><i><strong>*: </strong> Đây là thời gian được lấy dựa trên thời gian thực của thiết bị mà bạn đang sử dụng</i></small><br />
-            <small><i><strong>Bạn muốn nhận e-mail nhắc nhở khi đến hạn deadline</strong> <a href="#">Hãy thử tính năng này ngay</a> </i></small>
+            <small><i><strong>Source: </strong> <a href="https://github.com/trHgTung/snorlax" target='_blank'>GitHub (Hoang Tung)</a> </i></small>
         </div>
 
     </>
