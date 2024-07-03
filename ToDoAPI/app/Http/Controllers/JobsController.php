@@ -41,17 +41,37 @@ class JobsController extends Controller
                             ->where('jobs.status', '1')
                             ->select('characters.character_name')
                             ->get();
+                            
+        $getDeadline = $getJobsByUsrId->select('deadline');
 
-        // $processData = [];
-        // foreach($getJobsByUsrId as $getJobs) {
-        //     $processData[] = [
-        //         'get_jobs' => $getJobs,
-        //         'get_character_id' => $getCharacterId,
-        //         'check_pokemon_shiny' => $checkPokemonShiny,
-        //     ];
-        // }
+        // lay thoi gian thuc tren server
+        $getRealtime = Carbon::now()->format('Y-m-d');
 
+        // Xu ly chuoi du lieu deadline: VD chuyển [2024-12-12T12:12] thành [2024-12-12]
+        $finalTime = null;
+        $processDeadlineData = [];
+        foreach($getDeadline as $gdl) {
+            $processDeadline = substr($gdl['deadline'], 0, 10); 
+
+            if ($processDeadline === $getRealtime) {
+                $finalTime = $gdl['deadline'];
+                break;
+            }
+            // $processDeadlineData[] = $processDeadline;
+        }
+
+        $verifyDeadline = '';
+        if($finalTime){
+            $verifyDeadline = '1';
+        }
+        else {
+            $verifyDeadline = '0';
+        }
+
+        
         return response([
+            'check_time' => $verifyDeadline,
+            //'real_time' => $getRealtime,
             'get_pokemon_name' => $getPokemonName,
             'get_character_id' => $getCharacterId,
             'check_pokemon_shiny' => $checkPokemonShiny,

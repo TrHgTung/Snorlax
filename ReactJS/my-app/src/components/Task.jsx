@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAuth } from '../supports/AuthProvider';
 import { BsEmojiSmile, BsEmojiAstonished, BsEmojiAngry } from "react-icons/bs";
 import host from '../config/host.json';
+import { toast } from 'react-toastify';
 
 const {SERVER_API} = host;
 const {API_ENDPOINT} = host;
@@ -31,7 +32,11 @@ const Task = () => {
                 setDeadline(response.data.result);
                 setData(response.data.result);
                 setPokemonTaskName(response.data.get_pokemon_name);
-            } catch (error) {
+                //setCheckDeadline(response.data.check_time);
+
+                // console.log("Check Deadline: " + checkDeadline.character_name)              
+        }
+        catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
@@ -86,25 +91,13 @@ const Task = () => {
             console.error('Có lỗi xảy ra. Nội dung lỗi: ', error);
         }
     };
-
-    // const originDateTimeString = deadline.deadline;
-    // const formatDateTime = (originDateTimeString) => {
-    //     const date = new Date(originDateTimeString);
-    //     const day = String(date.getDate()).padStart(2, '0');
-    //     const month = String(date.getMonth() + 1).padStart(2, '0');
-    //     const year = date.getFullYear();
-    //     const hours = String(date.getHours()).padStart(2, '0');
-    //     const minutes = String(date.getMinutes()).padStart(2, '0');
-      
-    //     return `Ngày ${day}-${month}-${year} - Lúc ${hours}:${minutes}*`;
-    // };
-    // const formattedDateTime = formatDateTime(originDateTimeString);
+   
     let dl = [];
+    let dateOnDeadline = '';
     for(let i = 0; i < deadline.length; i++){
         dl.push(deadline[i].deadline);
     }
     console.log(dl);
-
     let dates = [];
     
     dl.forEach(datetime => {
@@ -113,29 +106,25 @@ const Task = () => {
     });
     
     console.log('Dinh dang xu ly: ' + dates);// ***
-
     let now = new Date();
-
     let year = now.getFullYear();
     let month = (now.getMonth() + 1).toString().padStart(2, '0'); // Thêm '0' phía trước nếu cần thiết
     let day = now.getDate().toString().padStart(2, '0'); // Thêm '0' phía trước nếu cần thiết
-
     let formatDate = `${year}-${month}-${day}`;
-
     console.log(`Ngày tháng năm hiện tại: ${formatDate}`); 
-
     // let result_date = [];
-    let dateOnDeadline = '';
+    
     for(let i = 0; i < dates.length; i++){
         if(dates[i] == formatDate){
             dateOnDeadline = dates[i];
         }
     }
     if(dateOnDeadline){
+        localStorage.setItem('deadline', dateOnDeadline);
         console.log(dateOnDeadline);
     }
     else {
-        console.log('Hông có lời nhắc nào đến hạn');
+        console.log('Không có lời nhắc nào đến hạn');
     }
 
     return (
