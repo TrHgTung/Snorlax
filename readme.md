@@ -3,7 +3,7 @@
 
 <h6>Phiên bản: 1.0</h6>
 <p>Một ứng dụng API-CSR nhằm lưu lại các lời nhắc cho nhiều người dùng </p>
-<img src="./GioiThieu.jpg">
+<img src="GIoiThieu.jpg">
 
     - Chủ thể: Người dùng
     - Kiến trúc phần mềm: Layered Architecture - Client-Side Rendering
@@ -53,7 +53,7 @@
 <h2>CÁCH CHẠY SOURCE</h2>
 <h4>Với source Laravel:</h4>
 1. Chạy Xampp với quyền admin, khởi động 2 dịch vụ: Apache và MySQL <br>
-2. Chạy lệnh `php artisan serve --port 4401`. Lúc này ứng dụng sẽ chạy trên 127.0.0.1:4401, mở trình duyệt và truy cập bằng địa chỉ này <br>
+2. Chạy lệnh `php artisan serve --port 4401`. Lúc này ứng dụng sẽ chạy trên http://127.0.0.1:4401, mở trình duyệt và truy cập bằng địa chỉ này <br>
 
 <h4>Với source ReactJS:</h4>
 1. Chạy lệnh `npm start`<br>
