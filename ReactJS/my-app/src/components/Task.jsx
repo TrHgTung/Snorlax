@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 
 const {SERVER_API} = host;
 const {API_ENDPOINT} = host;
+const {MAIL_API_ENDPOINT} = host;
+const {MAIL_SERVER_API} = host;
 
 const Task = () => {
     const [data, setData] = useState('');
@@ -18,6 +20,12 @@ const Task = () => {
     let stt = 1;
     const pokemonName = localStorage.getItem('pokemon_name');
     const assistId = localStorage.getItem('assist_id');
+
+    const [sendData, setSendData] = useState({
+        email: '',
+        assistant: '',
+        deadline: ''
+    });
 
     useEffect(() => {
         // const validToken = localStorage.getItem("token");
@@ -91,6 +99,41 @@ const Task = () => {
             console.error('Có lỗi xảy ra. Nội dung lỗi: ', error);
         }
     };
+
+    const sendMailFunction = async (e) => {
+        e.preventDefault();
+        try {
+            const email = localStorage.getItem('username');
+            const assistant = localStorage.getItem('pokemon_name');
+            const deadline = localStorage.getItem('deadline');
+         
+            const sendData = {
+                email: email,
+                assistant: assistant,
+                deadline: deadline // Sửa lỗi gán 'deadline' vào 'email'
+            };
+            const response = await axios.post(`http://127.0.0.1:5000/api/send`, sendData,
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Access-Control-Allow-Origin': '*',
+                        'supports_credentials' : true
+                    }
+                },
+                {withCredentials: true}
+            );
+           
+
+            if (response.data.success) {
+                console.log('Dang gui tin hieu toi SMTP...'); 
+            } else {             
+                console.error('Co loi xay ra');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        e.target.innerHTML = '<div></div>';
+    };
    
     let dl = [];
     let dateOnDeadline = '';
@@ -124,6 +167,7 @@ const Task = () => {
         console.log(dateOnDeadline);
     }
     else {
+        localStorage.removeItem('deadline');
         console.log('Không có lời nhắc nào đến hạn');
     }
 
@@ -131,7 +175,7 @@ const Task = () => {
       <div className='container'>
         <div>
             {(dateOnDeadline) ? (
-                <div className='text-danger mb-4 mt-1'>CẢNH BÁO: Có lời nhắc sắp đến hạn hôm nay, hãy kiểm tra lại</div>
+                <div className='text-danger mb-4 mt-1' onClick={sendMailFunction} id="notification-on-centerr">CẢNH BÁO: Có lời nhắc sắp đến hạn hôm nay, hãy kiểm tra lại<br />Nhấn vào đây để tắt</div>
             ) : (
                 <div className='mb-4 mt-1'><i>Hãy click vào từng trợ thủ để xem chúng nhắc bạn điều gì</i></div>
             )}

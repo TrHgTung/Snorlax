@@ -6,6 +6,10 @@
 .force-link{
   cursor: pointer;
 }
+
+#notification-on-centerr{
+  cursor: pointer;
+}
 /* 
 .App-logo {
   height: 40vmin;
