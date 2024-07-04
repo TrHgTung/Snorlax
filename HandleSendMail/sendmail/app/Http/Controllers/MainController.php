@@ -29,6 +29,7 @@ class MainController extends Controller
         $mail = new PHPMailer(true);
 
         try {
+            // HÃY THAY THẾ CÁC VỊ TRÍ BỊ ẨN ******* THÀNH ĐỊA CHỈ E-MAIL CỦA BẠN VÀ PASSWORD SMTP
             //Server settings
             $mail->CharSet = "UTF-8";
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
@@ -41,7 +42,7 @@ class MainController extends Controller
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
             //Recipients
-            $mail->setFrom('tungng14@gmail.com', 'System');
+            $mail->setFrom('*****@gmail.com', 'System');
             $mail->addAddress($req->email, $getName[0]);     //Add a recipient
         
             //Attachments
