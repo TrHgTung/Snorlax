@@ -177,7 +177,7 @@ const Task = () => {
             {(dateOnDeadline) ? (
                 <div className='text-danger mb-4 mt-1' onClick={sendMailFunction} id="notification-on-centerr">CẢNH BÁO: Có lời nhắc sắp đến hạn hôm nay, hãy kiểm tra lại<br />Nhấn vào đây để tắt</div>
             ) : (
-                <div className='mb-4 mt-1'><i>Hãy click vào từng trợ thủ để xem chúng nhắc bạn điều gì</i></div>
+                <div className='mb-4 mt-1'><i>Hãy hover vào từng trợ thủ để xem chúng nhắc bạn điều gì</i></div>
             )}
         </div>
         <h4>Danh sách lời nhắc cần hoàn thành</h4>

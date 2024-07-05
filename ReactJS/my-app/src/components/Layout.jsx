@@ -120,7 +120,10 @@ const Layout = ()  => {
     return (
       <div className='container'>
         <div className="row">
-          <div className="col-md-10 text-center mb-4 mt-3">
+          <div className="col-2 col-md-2 mb-4 mt-3">
+            <a href="/welcome" className='no-underline-link'>&lt; Quay lại Trang chủ</a>
+          </div>
+          <div className="col-md-8 col-8 text-center mb-4 mt-3">
             <h2 className='w-100 d-flex justify-content-center'>Lời nhắc</h2>
             <small><i>Người dùng: <a href='/profile'>@{display_name}</a> - Trợ lý chính:  
                 {assist_id_main === '1' && ' Venusaur'}
@@ -135,7 +138,7 @@ const Layout = ()  => {
                 && assist_id_main !== '5') && ' Không có'}
             </i></small>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2 col-2">
             <div className='mt-4'>
               <button onClick={logout} className='btn btn-sm btn-danger'>Đăng xuất</button>
             </div>

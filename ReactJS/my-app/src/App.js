@@ -12,58 +12,63 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Assistant from './components/Assistant';
 import Profile from './components/Profile';
+import Welcome from './components/Welcome';
 
 function App() {
   return (
     <Router>
+      <Routes>
+        <Route path="/welcome" element={<Welcome />} />
+      </Routes>
+
       <AuthProvider>
-                <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route 
-                        path="/" 
-                        element={
-                            <PrivateRoute>
-                                <Layout />
-                            </PrivateRoute>
-                        } 
-                    />
-                    <Route 
-                        path="/assistant-zone/:id" 
-                        element={
-                            <PrivateRoute>
-                                <Assistant />
-                            </PrivateRoute>
-                        } 
-                    />
-                    <Route 
-                        path="/profile" 
-                        element={
-                            <PrivateRoute>
-                                <Profile />
-                            </PrivateRoute>
-                        } 
-                    />
-                    <Route 
-                      path="/update/:id" 
-                      element={
-                        <PrivateRoute>
-                          <Update />
-                        </PrivateRoute>
-                      } 
-                    />
-                </Routes>
-                <ToastContainer 
-                  position="top-right"
-                  autoClose={5000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                />
+        <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route 
+                path="/" 
+                element={
+                    <PrivateRoute>
+                        <Layout />
+                    </PrivateRoute>
+                } 
+            />
+            <Route 
+                path="/assistant-zone/:id" 
+                element={
+                    <PrivateRoute>
+                        <Assistant />
+                    </PrivateRoute>
+                } 
+            />
+            <Route 
+                path="/profile" 
+                element={
+                    <PrivateRoute>
+                        <Profile />
+                    </PrivateRoute>
+                } 
+            />
+            <Route 
+              path="/update/:id" 
+              element={
+                <PrivateRoute>
+                  <Update />
+                </PrivateRoute>
+              } 
+            />
+        </Routes>
+        <ToastContainer 
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         </AuthProvider>
     </Router>
   );
