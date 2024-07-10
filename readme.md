@@ -19,14 +19,33 @@
 
 <h2>CÁC TÍNH NĂNG NỔI BẬT</h2>
 <h4>Phía Người dùng:</h4>
+
 1. Đăng nhập, đăng ký, đăng xuất (Sử dụng Bearer Token để xác thực và Sanctum Laravel để lưu phiên đăng nhập người dùng)<br>
 2. Viết lời nhắc và chọn nhân vật trợ thủ cho riêng mình. <br>
 3. Gửi e-mail tự động để nhắc nhở người dùng khi có lời nhắc sắp đến hạn.<br>
-<br>
+   <br>
 
 > Xem chi tiết [ở đây](##MÔ-TẢ-CHỨC-NĂNG)
 
 <br>
+
+## LUỒNG NGƯỜI DÙNG (USE-CASE)
+
+` Với vai trò là một người dùng bình thường`
+
+1. Xác thực người dùng: <br>
+   1.1. Nếu đã có tài khoản: đăng nhập <br>
+   1.2. Nếu chưa có tài khoản: đăng ký<br>
+2. Thêm lời nhắc mới: yêu cầu điền đủ thông tin của một lời nhắc, sau đó nhấn Thêm lời nhắc<br>
+3. Xem toàn bộ lời nhắc (của người dùng đã đăng nhập): Xem các thông tin mà người dùng đã cung cấp cho lời nhắc, được lấy từ cơ sở dữ liệu (CSDL) phía Back-end <br>
+4. Xem chi tiết lời nhắc: Xem toàn bộ thông tin của một lời nhắc ở một trang mới, điều này diễn ra sau khi người dùng click vào một lời nhắc <br>
+5. Đánh dấu là hoàn thành: Việc này giúp cho người dùng có thể đánh dấu các lời nhắc là đã hoàn tất, cũng như không còn hiển thị trên giao diện, nhưng vẫn sẽ lưu dưới CSDL với điều kiện `status` được cập nhật thành `0` <br>
+6. Xem thông tin tài khoản (Profile): Xem các thông tin của người dùng đã đăng ký, và có thể đăng xuất nhanh khỏi phiên hiện tại. <br>
+7. Đăng xuất: Xóa phiên hoạt động hiện tại của người dùng, bằng cách xóa các giá trị trong localStorage. Một khi các tính năng khác được vô tình truy cập đến mà không có dữ liệu cần thiết trong localStorage, thao tác truy cập sẽ bị chặn bởi điều kiện trong mã nguồn và trả về trạng thái 401 (Unauthorized)<br>
+8. Gửi e-mail: <br>
+   8.1. Giả tự động gửi e-mail (cố định): Ở giao diện hiển thị danh sách lời nhắc, sẽ có hàm kiểm tra giá trị `deadline`, nếu trùng với ngày hiện tại trên máy chủ, sẽ hiển thị một cảnh báo và khuyến khích người dùng click vào để tắt nó đi. Nhưng bản chất sẽ thực thi việc gửi e-mail cố định này. <br>
+   8.2. Tự động gửi e-mail: Đã được thiết lập (có thể kiểm tra trong commit 61), bằng cách truy vấn dữ liệu e-mail của người dùng và gửi e-mail từ phía máy chủ. Còn việc hoạt động theo lịch trình hay tự động bằng lệnh command thì cần phải setup trên máy chủ thực.
+   > Kỹ thuật SMTP: mục 8.1 dùng PHPMailer, mục 8.2 dùng SendMail có sẵn trong Laravel
 
 ## MÔ TẢ CHỨC NĂNG
 
@@ -211,6 +230,8 @@
 
 5. Cấu hình PHPMailer: truy cập đến thư mục `HandleSendMail\sendmail\app\Http\Controllers` và mở file class controller có tên 'MainController.php' và chỉnh sửa các thông số bị ẩn dưới dạng **\*\*\*\*** ở các dòng 39, 40 và 45
    > Gợi ý cho các bạn hãy tạo một mật khẩu ứng dụng bằng tài khoản Google, sau đó thêm mật khẩu của ứng dụng bạn vừa tạo vào dòng 40: '$mail->password = 'mật-khẩu-16-ký-tự-của-bạn'', còn ở 2 dòng 39 và 45 chính là địa chỉ Gmail của bạn.
+   > <br>
+6. Thiết lập mục 5 tương tự với file .env trong source `HandleSendMail`, bởi vì SMTP không còn dùng PHPMailer, mà dùng tính năng gửi e-mail được tích hợp sẵn trong Laravel.
 
 <h2>CÁCH CÀI ĐẶT SOURCE</h2>
 
@@ -227,7 +248,7 @@
 7. Chạy lệnh `php artisan migrate` để ánh xạ từ model lên cơ sở dữ liệu MySQL. Nếu lỗi xảy ra, hãy migrate file `2024_06_05_044712_init_architecture.php` và `2014_10_12_000000_create_users_table.php` trong thư mục "database/migrations" vào MySQL. <br>
 8. Chạy lệnh `php artisan serve --port 4401`. Lúc này ứng dụng sẽ chạy trên 127.0.0.1:4401, mở trình duyệt và truy cập bằng địa chỉ này <br>
 
-<h4>Với source Laravel (Xử lý Gửi e-mail):</h4>
+<h4>Với source Laravel (Xử lý Gửi e-mail: `HandleSendMail`):</h4>
 
 > Mở Terminal/Command Line: trỏ tới source Laravel với lệnh `cd HandleSendMail/sendmail` <br>
 
@@ -236,6 +257,17 @@
 3. Mở command line: cd <tên thư mục chứa source>, chạy lệnh `composer update` (nếu ko được thì `composer install`) <br>
 4. Copy file .env.example thành 1 file mới, và đổi tên file mới này thành .env <br>
 5. Mở file .env mới tạo, tìm tới dòng DB_DATABASE=project và thay thế 'project' thành tên cơ sở dữ liệu được tạo trong MySQL (handlesendmail)<br>
+   Và thiết lập gửi e-mail trong file .env: <br>
+   ... <br>
+   `MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=e-mail-của-bạn@gmail.com 
+MAIL_PASSWORD=mật-khẩu-google-app-password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="e-mail-của-bạn@gmail.com"
+MAIL_FROM_NAME="Administrator"`<br>
+   ... <br>
 6. Chạy lệnh `php artisan key:generate` để tạo khóa truy cập cho localhost (Laravel) <br>
 7. Chạy lệnh `php artisan migrate` để ánh xạ từ model lên cơ sở dữ liệu MySQL. Nếu lỗi xảy ra, hãy migrate file `2024_07_04_093234_init_migration.php` trong thư mục "database/migrations" vào MySQL. <br>
 8. Chạy lệnh `php artisan serve --port 4401`. Lúc này ứng dụng sẽ chạy trên 127.0.0.1:4401, mở trình duyệt và truy cập bằng địa chỉ này <br>
