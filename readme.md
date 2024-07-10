@@ -44,7 +44,7 @@
 7. Đăng xuất: Xóa phiên hoạt động hiện tại của người dùng, bằng cách xóa các giá trị trong localStorage. Một khi các tính năng khác được vô tình truy cập đến mà không có dữ liệu cần thiết trong localStorage, thao tác truy cập sẽ bị chặn bởi điều kiện trong mã nguồn và trả về trạng thái 401 (Unauthorized)<br>
 8. Gửi e-mail: <br>
    8.1. Giả tự động gửi e-mail (cố định): Ở giao diện hiển thị danh sách lời nhắc, sẽ có hàm kiểm tra giá trị `deadline`, nếu trùng với ngày hiện tại trên máy chủ, sẽ hiển thị một cảnh báo và khuyến khích người dùng click vào để tắt nó đi. Nhưng bản chất sẽ thực thi việc gửi e-mail cố định này. <br>
-   8.2. Tự động gửi e-mail: Đã được thiết lập (có thể kiểm tra trong commit 61), bằng cách truy vấn dữ liệu e-mail của người dùng và gửi e-mail từ phía máy chủ. Còn việc hoạt động theo lịch trình hay tự động bằng lệnh command thì cần phải setup trên máy chủ thực.
+   8.2. Tự động gửi e-mail: Đã được thiết lập (có thể kiểm tra trong commit [61](https://github.com/TrHgTung/Snorlax/commit/caa588304ac161857b864d86ad14422722fdfe46)), bằng cách truy vấn dữ liệu e-mail của người dùng và gửi e-mail từ phía máy chủ. Còn việc hoạt động theo lịch trình hay tự động bằng lệnh command thì cần phải setup trên máy chủ thực.
    > Kỹ thuật SMTP: mục 8.1 dùng PHPMailer, mục 8.2 dùng SendMail có sẵn trong Laravel
 
 ## MÔ TẢ CHỨC NĂNG
