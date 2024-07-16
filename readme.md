@@ -303,7 +303,24 @@ SANCTUM_STATEFUL_DOMAINS=localhost`
 
 - Lỗi hiển thị hình ảnh (đã sửa - phiên bản 1.1): Hãy tự chuẩn bị hình ảnh trong thư mục `.\ReactJS\my-app\public\assets\assistant_zone\***.png` <br>
 
-Gợi ý các tên file còn thiếu: Snorlax_0.png; Snorlax_1.png <br><br>
+- Lỗi CORS: Mở file config/cors.php (trong source Laravel) -> cập nhật các giá trị theo mẫu sau (trong object return): <br>
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+
+    'allowed_methods' => ['*'],
+
+    'allowed_origins' => ['*', 'http://localhost:3000'], // thay đổi port nếu source React chạy trên cổng khác 3000
+
+    'allowed_origins_patterns' => [],
+
+    'allowed_headers' => ['*'],
+
+    'exposed_headers' => [],
+
+    'max_age' => 0,
+
+    'supports_credentials' => true,
+
+  <br>
 
 <h3>LIÊN HỆ VÀ DONATE</h3>
 <p>Các bạn nếu thích dự án này, mong muốn có thêm tính năng mới (mở rộng dự án) hoặc chỉ đơn giản là muốn donate cho tôi ☕☕☕; hãy liên hệ với tôi qua Telegram: <i>@trhgtung</i> hoặc comment tại video bất kỳ với nội dung bạn mong muốn trên kênh YouTube: <a href="https://www.youtube.com/@TungSupport">@TungSupport</a></p>
