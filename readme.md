@@ -1,6 +1,8 @@
 <h1>Snorlax - Một ứng dụng Lời nhắc cơ bản với Laravel và ReactJS</h1>
 <h2>GIỚI THIỆU</h2>
 
+Video demo: https://youtu.be/ENyF0MQx-78
+
 <h6>Phiên bản: 1.1</h6>
 <p>Một hệ thống phân tán nhằm tạo ra lời nhắc và nhắc nhở cho nhiều người dùng </p>
 <img src="GIoiThieu.jpg">
